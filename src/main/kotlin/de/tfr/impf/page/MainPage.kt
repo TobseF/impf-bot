@@ -19,15 +19,15 @@ class MainPage(driver: WebDriver) : AbstractPage(driver) {
 
     fun title(): WebElement = findBy("//h1")
 
-    fun validate() = title().text == "Buchen Sie die Termine für Ihre Corona-Schutzimpfung"
+    override fun isDisplayed() = title().text == "Buchen Sie die Termine für Ihre Corona-Schutzimpfung"
 
     fun chooseLocation(locationName: String) {
         chooseLocation()?.click()
-        findByOrNull("//li[@role='option' and contains(text() , '$locationName')]")?.click()
+        findAnyBy("//li[@role='option' and contains(text() , '$locationName')]")?.click()
     }
 
     fun submitLocation() {
-        findByOrNull("//button[@type='submit']")?.click()
+        findAnyBy("//button[@type='submit']")?.click()
     }
 
 

@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement
 
 class LocationPage(driver: WebDriver) : AbstractPage(driver) {
 
-    fun title(): WebElement = findBy("//h1")
+    fun title(): WebElement? = findAnyBy("//h1")
 
-    fun validate() = title().text == "Wurde Ihr Anspruch auf eine Corona-Schutzimpfung bereits geprüft?"
+    override fun isDisplayed() = title()?.text == "Wurde Ihr Anspruch auf eine Corona-Schutzimpfung bereits geprüft?"
 
     /**
      * Already approved -> No
@@ -24,7 +24,7 @@ class LocationPage(driver: WebDriver) : AbstractPage(driver) {
      * Are you an approved person -> yes
      */
     fun checkCorrectPerson() {
-        findBy("//input[@type='radio' and @formcontrolname='isValid']//following-sibling::span[contains(text(),'Ja')]/..").click()
+        findAnyBy("//input[@type='radio' and @formcontrolname='isValid']//following-sibling::span[contains(text(),'Ja')]/..")?.click()
     }
 
     fun enterAge(age: Int) {

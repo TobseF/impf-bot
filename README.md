@@ -34,6 +34,12 @@ locations = 69123 Heidelberg,76137 Karlsruhe
 # Your age. Used in age verification field.
 personAge = 42
 
+# Settings for the request page. Only needed if you set `sendRequest = true`  
+sendRequest = true
+email = impfMePlease@lasthope.de
+# Mobile number for sms verification. Numbers after the "+49"
+mobileNumber = 152123123123
+
 # Chrome Driver
 pathDriver = C:/ProgramData/chocolatey/lib/chromedriver/tools/
 nameDriver = webdriver.chrome.driver
@@ -41,7 +47,7 @@ exeDriver = chromedriver.exe
 
 # Enabled the slack messages
 slackEnabled = false
-# These can be skipped, if Slack is disabled
+# These can be skipped, if Slack is `slackEnabled = false`
 slackBotApiToken = xoxb-123123123-123123123123123123123123123
 slackBotChannel = #random
 ```

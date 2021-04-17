@@ -23,6 +23,7 @@ open class KProperties {
 
     fun lazyProperty() = LazyProperty(this) { it }
     fun lazyIntProperty() = LazyProperty(this) { it.toInt() }
+    fun lazyBoolProperty() = LazyProperty(this) { it.toBoolean() }
 
     open class LazyProperty<T>(private val props: KProperties, private val typeMapper: (String) -> T) {
         private var value = ""
@@ -34,5 +35,4 @@ open class KProperties {
         }
     }
 
-    fun String.isTrue() = (this == "true")
 }

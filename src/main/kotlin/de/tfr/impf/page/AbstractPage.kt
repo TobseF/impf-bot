@@ -11,7 +11,7 @@ abstract class AbstractPage(protected val driver: WebDriver) {
         PageFactory.initElements(driver, this)
     }
 
-    fun findByOrNull(xPath: String): WebElement? {
+    fun findAnyBy(xPath: String): WebElement? {
         return findAll(xPath).firstOrNull()
     }
 
@@ -28,5 +28,7 @@ abstract class AbstractPage(protected val driver: WebDriver) {
     }
 
     fun findAll(xPath: String): MutableList<WebElement> = driver.findElements(By.xpath(xPath))
+
+    open fun isDisplayed() = false
 
 }
