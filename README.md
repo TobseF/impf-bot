@@ -24,11 +24,15 @@ choco install selenium-chrome-driver
 ```
 
 ### `config.properties`
+Settings are stored in a config file which is located in: `src/main/resources/config.properties`.  
+Edit these settings before first start.
 
 ```properties
 mainPageUrl = https://www.impfterminservice.de/impftermine
 # Comma separated list of locations
 locations = 69123 Heidelberg,76137 Karlsruhe
+# Your age. Used in age verification field.
+personAge = 42
 
 # Chrome Driver
 pathDriver = C:/ProgramData/chocolatey/lib/chromedriver/tools/

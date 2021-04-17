@@ -1,45 +1,25 @@
 package de.tfr.impf.config
 
-import java.io.FileInputStream
-import java.util.*
-import kotlin.reflect.KProperty
+object Config : KProperties() {
 
-object Config {
-
-    private var properties: Properties = loadProperties()
-
-    private fun loadProperties(): Properties {
-        return Properties().also { it.load(FileInputStream("config.properties")) }
+    init {
+        loadProperties("config.properties")
     }
 
-    fun getProperty(propertyKey: String): String {
-        return properties.getProperty(propertyKey)
-            ?: throw IllegalStateException("Failed finding property `$propertyKey`")
-    }
+    val mainPageUrl: String by lazyProperty()
+    private val locations: String by lazyProperty()
+    fun locationList() = locations.split(",")
+    val personAge: Int by lazyIntProperty()
 
-    val mainPageUrl: String by LazyProperty()
-
-    val nameDriver: String by LazyProperty()
-    val exeDriver: String by LazyProperty()
-    val pathDriver: String by LazyProperty()
+    val nameDriver: String by lazyProperty()
+    val exeDriver: String by lazyProperty()
+    val pathDriver: String by lazyProperty()
     val timeOutDefault = 1600L
     val timeOutLong = 6500L
 
-    val slackBotApiToken: String by LazyProperty()
-    private val locations: String by LazyProperty()
-    fun locationList() = locations.split(",")
-    val slackBotChannel: String by LazyProperty()
-    private val slackEnabled: String by LazyProperty()
-    fun isSlackEnabled() = slackEnabled == "true"
-
-    private open class LazyProperty {
-        private var value = ""
-        operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
-            if (value.isEmpty()) {
-                value = getProperty(property.name)
-            }
-            return value
-        }
-    }
+    fun isSlackEnabled() = slackEnabled.isTrue()
+    val slackBotApiToken: String by lazyProperty()
+    private val slackEnabled: String by lazyProperty()
+    val slackBotChannel: String by lazyProperty()
 
 }

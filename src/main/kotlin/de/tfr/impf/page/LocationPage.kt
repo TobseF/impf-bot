@@ -14,7 +14,6 @@ class LocationPage(driver: WebDriver) : AbstractPage(driver) {
      */
     fun askForApproval() {
         findBy("//input[@type='radio' and @name='vaccination-approval-checked']//following-sibling::span[contains(text(),'Nein')]/..").click()
-        //findBy("//input[@class='ets-radio-control' and and contains(text(), 'Nein')]]")
     }
 
     fun submitInput() {
@@ -32,16 +31,12 @@ class LocationPage(driver: WebDriver) : AbstractPage(driver) {
         findBy("//input[@formcontrolname='age']").sendKeys("" + age)
     }
 
-    fun acceptCookies() {
-        val cookieNags: MutableList<WebElement> = findAll("//a[contains(text(),'Auswahl bestätigen')]")
-        cookieNags.firstOrNull()?.click()
-    }
-
+    /**
+     * Locates the warning on top or on bottom
+     * @return free seats are not available
+     */
     fun isFull(): Boolean {
         return findAll("//div[contains(@class, 'alert-danger') and contains(text(), 'keine')]").isNotEmpty()
     }
 
-    fun isFull2(): Boolean {
-        return findAll("//div[contains(@class, 'alert-danger') and contains(text(),'keine')]").isNotEmpty()
-    }
 }

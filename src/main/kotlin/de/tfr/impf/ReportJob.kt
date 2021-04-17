@@ -1,6 +1,7 @@
 package de.tfr.impf
 
 import de.tfr.impf.config.Config
+import de.tfr.impf.page.CookieNagComponent
 import de.tfr.impf.page.LocationPage
 import de.tfr.impf.page.MainPage
 import de.tfr.impf.selenium.createDriver
@@ -14,8 +15,10 @@ class ReportJob {
 
     private var driver: WebDriver = createDriver()
     private val locations = Config.locationList()
+    private val personAge = Config.personAge
 
     fun reportFreeSlots() {
+        log.info { "Person age: $personAge" }
         log.info { "Started checking these ${locations.size} locations:\n$locations" }
         while (true) {
             checkLocations()
@@ -27,30 +30,34 @@ class ReportJob {
             try {
                 checkLocation(location)
             } catch (e: Exception) {
-                log.error(e) { "Failed to check location: $location" }
+                log.error(e) { "Failed to check location: $location\n" + e.message }
             }
         }
     }
 
+
     private fun checkLocation(location: String) {
         val mainPage = openMainPage(driver)
+        val cookieNag = CookieNagComponent(driver)
         mainPage.validate()
         mainPage.chooseLocation(location)
+        Thread.sleep(500)
+        cookieNag.acceptCookies()
         mainPage.submitLocation()
         val locationPage = LocationPage(driver)
         if (locationPage.validate()) {
             log.debug { "Changed to location page: $location" }
             locationPage.askForApproval()
             Thread.sleep(2000)
-            locationPage.acceptCookies()
+            cookieNag.acceptCookies()
             if (locationPage.isFull()) {
                 log.debug { "Location: $location is full" }
             } else {
                 locationPage.checkCorrectPerson()
-                locationPage.enterAge(33)
+                locationPage.enterAge(personAge)
                 locationPage.submitInput()
                 Thread.sleep(2000)
-                if (locationPage.isFull2()) {
+                if (locationPage.isFull()) {
                     log.debug { "Location: $location is full" }
                 } else {
                     sendMessage(location)
@@ -62,7 +69,7 @@ class ReportJob {
     }
 
     private fun sendMessage(location: String) {
-        val message = "Found free seats in location: $location"
+        val message = "Found free seats in location $location:${driver.currentUrl}"
         log.info { message }
         if (Config.isSlackEnabled()) {
             SlackClient().sendMessage(message)
