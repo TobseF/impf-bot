@@ -42,39 +42,74 @@ class ReportJob {
     }
 
 
-    private fun checkLocation(location: String) {
+    private fun checkLocation(location: Config.Location) {
         val mainPage = openMainPage(driver)
         val cookieNag = CookieNagComponent(driver)
         mainPage.isDisplayed()
-        mainPage.chooseLocation(location)
+        mainPage.chooseLocation(location.name)
         Thread.sleep(500)
         cookieNag.acceptCookies()
         mainPage.submitLocation()
         val locationPage = LocationPage(driver)
         if (locationPage.isDisplayed()) {
             log.debug { "Changed to location page: $location" }
-            locationPage.askForApproval()
+            if (location.hasCode()) {
+                searchFreeDateByCode(locationPage, location)
+            } else {
+                checkClaim(locationPage, cookieNag, location)
+            }
+        }
+    }
+
+    private fun searchFreeDateByCode(
+        locationPage: LocationPage,
+        location: Config.Location
+    ) {
+        locationPage.confirmClaim()
+        val code = location.placementCode
+        if (code != null) {
+            locationPage.enterCodeSegment0(code)
+            locationPage.searchForFreeDate()
+            locationPage.searchForVaccinateDate()
+            if (locationPage.hasNoVaccinateDateAvailable()) {
+                log.debug { "Correct code, but not free vaccination slots: $location" }
+            } else {
+                sendMessageFoundDates(location)
+                waitLongForUserInput()
+            }
+        }
+    }
+
+    private fun checkClaim(
+        locationPage: LocationPage,
+        cookieNag: CookieNagComponent,
+        location: Config.Location
+    ) {
+        locationPage.askForClaim()
+        Thread.sleep(2000)
+        cookieNag.acceptCookies()
+        if (locationPage.isFull()) {
+            log.debug { "Location: $location is full" }
+        } else {
+            locationPage.checkCorrectPerson()
+            locationPage.enterAge(personAge)
+            locationPage.submitInput()
             Thread.sleep(2000)
-            cookieNag.acceptCookies()
             if (locationPage.isFull()) {
                 log.debug { "Location: $location is full" }
             } else {
-                locationPage.checkCorrectPerson()
-                locationPage.enterAge(personAge)
-                locationPage.submitInput()
-                Thread.sleep(2000)
-                if (locationPage.isFull()) {
-                    log.debug { "Location: $location is full" }
-                } else {
-                    sendMessage(location)
-                    val minutes = 20L
-                    if (sendRequest) {
-                        requestCode()
-                    }
-                    Thread.sleep(minutes * 60 * 1000)
+                sendMessageFoundFreeSeats(location)
+                if (sendRequest) {
+                    requestCode()
                 }
+                waitLongForUserInput()
             }
         }
+    }
+
+    private fun waitLongForUserInput() {
+        val minutes = 20L
+        Thread.sleep(minutes * 60 * 1000)
     }
 
     private fun requestCode() {
@@ -84,8 +119,18 @@ class ReportJob {
         requestCodePage.requestCode()
     }
 
-    private fun sendMessage(location: String) {
-        val message = "Found free seats in location $location:${driver.currentUrl}"
+
+    private fun sendMessageFoundFreeSeats(location: Config.Location) {
+        "Found free seats in location ${location.name}:${driver.currentUrl}"
+    }
+
+    private fun sendMessageFoundDates(location: Config.Location) {
+        "Found free vaccination dates in location" +
+                "Ten minutes left to choose a date"
+        " ${location.name}:${driver.currentUrl}"
+    }
+
+    private fun sendMessage(message: String) {
         log.info { message }
         if (Config.isSlackEnabled()) {
             SlackClient().sendMessage(message)

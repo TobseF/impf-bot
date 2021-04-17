@@ -12,12 +12,22 @@ class LocationPage(driver: WebDriver) : AbstractPage(driver) {
     /**
      * Already approved -> No
      */
-    fun askForApproval() {
-        findBy("//input[@type='radio' and @name='vaccination-approval-checked']//following-sibling::span[contains(text(),'Nein')]/..").click()
+    fun askForClaim() {
+        findAnyBy(claimSelection("Nein"))?.click()
     }
 
+    /**
+     * Fo you have a verification code -> Yes
+     */
+    fun confirmClaim() {
+        findAnyBy(claimSelection("Ja"))?.click()
+    }
+
+    private fun claimSelection(text: String) =
+        "//input[@type='radio' and @name='vaccination-approval-checked']//following-sibling::span[contains(text(),'$text')]/.."
+
     fun submitInput() {
-        findBy("//button[@type='submit']").click()
+        findAnyBy("//button[@type='submit']")?.click()
     }
 
     /**
@@ -38,5 +48,26 @@ class LocationPage(driver: WebDriver) : AbstractPage(driver) {
     fun isFull(): Boolean {
         return findAll("//div[contains(@class, 'alert-danger') and contains(text(), 'keine')]").isNotEmpty()
     }
+
+    fun codeField(index: Int) = findAnyBy("//input[@type='text' and @data-index='$index']")
+
+    private fun fillCodeField(index: Int, code: String) = codeField(index)?.sendKeys(code)
+
+    fun enterCodeSegment0(code: String) = fillCodeField(0, code)
+    fun enterCodeSegment1(code: String) = fillCodeField(1, code)
+    fun enterCodeSegment2(code: String) = fillCodeField(2, code)
+
+    /**
+     * Termin suchen
+     */
+    fun searchForFreeDate() = submitInput()
+
+    /**
+     * Impftermine > Termin suchen
+     */
+    fun searchForVaccinateDate() = findAnyBy("//button[contains(text(),'Termine suchen')]")?.click()
+
+    fun hasNoVaccinateDateAvailable(): Boolean =
+        (findAnyBy("//span[@class='its-slot-pair-search-no-results']")?.isDisplayed) ?: false
 
 }

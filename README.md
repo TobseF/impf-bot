@@ -29,8 +29,9 @@ Edit these settings before first start.
 
 ```properties
 mainPageUrl = https://www.impfterminservice.de/impftermine
-# Comma separated list of locations
-locations = 69123 Heidelberg,76137 Karlsruhe
+# Comma separated list of locations. 
+# Optional, if you already have a placement code just add it in square brackets after the place 
+locations = 69124 Heidelberg[XXXX-XXXX-XXXX],76137 Karlsruhe
 # Your age. Used in age verification field.
 personAge = 42
 
