@@ -46,12 +46,11 @@ class SlackClient {
         val client = Slack.getInstance().methods(apiToken)
         try {
             // Call the conversations.list method using the built-in WebClient
-            val result = client.conversationsList { r: ConversationsListRequestBuilder ->
-                r // The token you used to initialize your app
-
-            }
-            for (channel in result.channels) {
-                log.info("Channel: " + channel.name + " id: " + channel.id)
+            val result = client.conversationsList { r: ConversationsListRequestBuilder -> r }
+            result?.channels?.let {
+                for (channel in it) {
+                    log.info("Channel: " + channel.name + " id: " + channel.id)
+                }
             }
         } catch (e: IOException) {
             log.error("error: " + e.message, e)
@@ -100,7 +99,7 @@ class SlackClient {
             }
             log.debug { "result: $result" }
 
-            result.messages.forEach { message ->
+            result.messages?.forEach { message ->
                 val text = message.text
                 if (text.startsWith(messageSsmOK)) {
                     // ignore an already accepted sms
