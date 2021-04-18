@@ -14,6 +14,8 @@ can use Slack to send you a message.
 sms:999-999
 ```
 
+![Sequence Digramm](doc/sequence-doku.png)
+
 ## 🛠 Setup
 
 ### Selenium

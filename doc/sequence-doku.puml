@@ -1,0 +1,48 @@
+@startuml
+!include https://raw.githubusercontent.com/future-architect/puml-themes/master/themes/puml-theme-toy.puml
+
+participant ImpfBot
+participant ImpfPortal
+actor       User
+entity      Mobile
+entity      SlackBot
+collections Mail
+User -> ImpfBot: start(config)
+ImpfBot -> ImpfPortal: openStartPage()
+group StartPage
+ImpfBot -> ImpfPortal: acceptCookies()
+
+ImpfBot -> ImpfPortal: submit(firstLocation)
+end
+group LocationPage
+ImpfBot -> ImpfPortal: checkForFreeSlots()
+ImpfBot <-- ImpfPortal: Yes we have a free slot (or probably not)
+ImpfBot -> ImpfPortal: checkClaim(userAge)
+ImpfBot <-- ImpfPortal: We send you a SMS! (or we have no free slots)
+end
+group SmsVerificationPage
+ImpfPortal --> SlackBot: Hey user... check your SMS, only 10 minutes left!
+ImpfPortal --> Mobile: sendConfirmationSMS(sms)
+User -> Mobile: checkSMS()
+User -> Slack: typeSms("sms:999-999")
+ImpfBot -> Slack: readSmsFormChannel()
+ImpfBot <-- Slack: sms:999-999
+ImpfBot --> ImpfPortal: inputSms("999-999")
+ImpfPortal --> Mail: sendPlacementCode("N7L5-GLPM-N42T")
+end
+group LocationPage [This time with placement code]
+User -> Mail: checkMailForPlacementCode()
+User -> ImpfBot: setPlacementCodeInConfig("N7L5-GLPM-N42T")
+ImpfBot -> ImpfPortal: checkFreeDatesWithCode("N7L5-GLPM-N42T")
+ImpfBot <-- ImpfPortal: we have free dates
+end
+group BookingPage
+ImpfBot --> SlackBot: Be happy and choose your data (only 10 minutes left)
+   group otional
+   User -> ImpfBot: manualChooseBestData()
+   end
+ImpfBot -> ImpfPortal: fillUserData(userData)
+ImpfBot -> ImpfPortal: commitVaccinationDate
+ImpfPortal --> Mail: Congratulation, you got the blue paper (booking confirmation)
+end
+@enduml
