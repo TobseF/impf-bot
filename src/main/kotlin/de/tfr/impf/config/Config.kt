@@ -33,6 +33,8 @@ object Config : KProperties() {
     val slackBotApiToken: String by lazyProperty()
     private val slackEnabled: Boolean by lazyBoolProperty()
     val slackBotChannel: String by lazyProperty()
+    val slackBotChannelReadSmsName: String by lazyProperty()
+    val slackBotChannelReadSmsId: String by lazyProperty()
 
     /**
      * @locationStatement location name with optional verification code in square brackets. e.g. "69123 Heidelberg[XXXX-XXXX-XXXX]]"

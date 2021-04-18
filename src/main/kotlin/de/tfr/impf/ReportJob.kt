@@ -1,10 +1,7 @@
 package de.tfr.impf
 
 import de.tfr.impf.config.Config
-import de.tfr.impf.page.CookieNagComponent
-import de.tfr.impf.page.LocationPage
-import de.tfr.impf.page.MainPage
-import de.tfr.impf.page.RequestCodePage
+import de.tfr.impf.page.*
 import de.tfr.impf.selenium.createDriver
 import de.tfr.impf.slack.SlackClient
 import mu.KotlinLogging
@@ -21,6 +18,8 @@ class ReportJob {
     private val sendRequest = Config.sendRequest
     private val mobileNumber = Config.mobileNumber
     private val email = Config.email
+
+    private val readSmsFromSlack = true
 
     fun reportFreeSlots() {
         log.info { "Person age: $personAge" }
@@ -100,7 +99,7 @@ class ReportJob {
             } else {
                 if (sendRequest) {
                     requestCode(location)
-                }else{
+                } else {
                     sendMessageFoundFreeSeats(location)
                     waitLongForUserInput()
                 }
@@ -120,22 +119,45 @@ class ReportJob {
         requestCodePage.requestCode()
         if (requestCodePage.isLimitReached()) {
             log.debug { "Reached request limit in $location" }
-        }else{
+        } else {
             sendMessageFoundFreeSeats(location)
-            waitLongForUserInput()
+            if (readSmsFromSlack) {
+                acceptSmsBySlackMessage(location)
+            } else {
+                waitLongForUserInput()
+            }
+        }
+    }
+
+    /**
+     * Reads the sms from a slack channel
+     */
+    private fun acceptSmsBySlackMessage(location: Config.Location) {
+        val slackClient = SlackClient()
+        val minutes = 10
+        val retries = minutes * 6
+        for (i in 0 .. retries) {
+            val smsCode = slackClient.findLasSmsCode()
+            if (smsCode != null) {
+                val smsVerificationPage = SmsVerificationPage(driver)
+                smsVerificationPage.enterSmsVerificationCode(smsCode)
+                smsVerificationPage.submitVerificationCodeLocation()
+                slackClient.acceptSms(smsCode)
+            }
+            Thread.sleep(10 * 1000)
         }
     }
 
 
     private fun sendMessageFoundFreeSeats(location: Config.Location) {
-        val message = "Found free seats in location ${location.name}:${driver.currentUrl}"
+        val message = "Found free seats in location ${location.name}:${driver.currentUrl}" +
+                "Five minutes left to send the sms verification"
         sendMessage(message)
     }
 
     private fun sendMessageFoundDates(location: Config.Location) {
-        val message = "Found free vaccination dates in location" +
-                "Ten minutes left to choose a date"
-        " ${location.name}:${driver.currentUrl}"
+        val message = "Found free vaccination dates in location ${location.name}:${driver.currentUrl}\n" +
+                "Ten minutes left to choose a date."
         sendMessage(message)
     }
 

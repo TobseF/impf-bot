@@ -9,6 +9,11 @@ Searches the official "[ImpfterminService - Der Patientenservice 116117](https:/
 Corona vaccinate slots. It can search multiple locations which can be provided in a list. When it finds a free slot, it
 can use Slack to send you a message.
 
+📱 Also the the SMS verification step is manged by a slack bot. Simply write the verification code into the Slack channel:
+```properties
+sms:999-999
+```
+
 ## 🛠 Setup
 
 ### Selenium
