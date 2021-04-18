@@ -23,4 +23,6 @@ class RequestCodePage(driver: WebDriver) : AbstractPage(driver){
         findAnyBy("//button[@type='submit']")?.click()
     }
 
+    fun isLimitReached() = findAll("//span[contains(text(), 'Anfragelimit erreicht')]").isNotEmpty()
+
 }

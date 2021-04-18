@@ -26,13 +26,13 @@ class SlackClient {
     }
 
     private fun sendToChannel(methods: MethodsClient, message: String) {
-        println("post message")
+        log.debug { "Sending Slack message: $message" }
         val request = ChatPostMessageRequest.builder()
             .channel(channelName)
             .text(":wave: $message")
             .build()
         val response = methods.chatPostMessage(request)
-        println(response)
+        log.debug { "Slack response: $response" }
     }
 
     /**

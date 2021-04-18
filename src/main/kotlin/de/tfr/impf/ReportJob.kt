@@ -37,7 +37,7 @@ class ReportJob {
             } catch (e: Exception) {
                 log.error(e) { "Failed to check location: $location\n" + e.message }
             }
-            Thread.sleep(1 * 60 * 1000)
+            Thread.sleep(30 * 1000)
         }
     }
 
@@ -98,11 +98,12 @@ class ReportJob {
             if (locationPage.isFull()) {
                 log.debug { "Location: $location is full" }
             } else {
-                sendMessageFoundFreeSeats(location)
                 if (sendRequest) {
-                    requestCode()
+                    requestCode(location)
+                }else{
+                    sendMessageFoundFreeSeats(location)
+                    waitLongForUserInput()
                 }
-                waitLongForUserInput()
             }
         }
     }
@@ -112,22 +113,30 @@ class ReportJob {
         Thread.sleep(minutes * 60 * 1000)
     }
 
-    private fun requestCode() {
+    private fun requestCode(location: Config.Location) {
         val requestCodePage = RequestCodePage(driver)
         requestCodePage.fillEmail(email)
         requestCodePage.fillMobileNumber(mobileNumber)
         requestCodePage.requestCode()
+        if (requestCodePage.isLimitReached()) {
+            log.debug { "Reached request limit in $location" }
+        }else{
+            sendMessageFoundFreeSeats(location)
+            waitLongForUserInput()
+        }
     }
 
 
     private fun sendMessageFoundFreeSeats(location: Config.Location) {
-        "Found free seats in location ${location.name}:${driver.currentUrl}"
+        val message = "Found free seats in location ${location.name}:${driver.currentUrl}"
+        sendMessage(message)
     }
 
     private fun sendMessageFoundDates(location: Config.Location) {
-        "Found free vaccination dates in location" +
+        val message = "Found free vaccination dates in location" +
                 "Ten minutes left to choose a date"
         " ${location.name}:${driver.currentUrl}"
+        sendMessage(message)
     }
 
     private fun sendMessage(message: String) {
