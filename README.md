@@ -6,22 +6,36 @@
 [![Selenium](https://img.shields.io/badge/Selenium-3.141.59-green.svg?style=flat&logo=Selenium&logoColor=white)](https://www.selenium.dev/)
 
 Searches the official "[ImpfterminService - Der Patientenservice 116117](https://www.impfterminservice.de/)" for free
-Corona vaccinate slots. It can search multiple locations which can be provided in a list. When it finds a free slot, it
+Corona vaccination slots. It can search multiple locations at once which can be provided in a list. When it finds a free slot, it
 can use Slack to send you a message.
 
-📱 Also the the SMS verification step is manged by a slack bot. Simply write the verification code into the Slack channel:
+📱 Also the SMS verification step is managed by a Slack bot. Simply write the verification code into the Slack channel:
 ```properties
 sms:999-999
 ```
 
 ![Sequence Digramm](doc/sequence-doku.png)
+These steps are repeated for every location. So it's no problem to check 14 locations at once.
+If the bot recognizes that no free slots are available, it waits 30 seconds and goes on to the next location.
+
+> ### ⚠ Warning: The online booking isn't an authorization
+> On the booking date you still have to bring the documents with you, to proof that you are qualified to receive the vaccination.
+> Check out [the official guidelines](https://sozialministerium.baden-wuerttemberg.de/de/gesundheit-pflege/gesundheitsschutz/infektionsschutz-hygiene/informationen-zu-coronavirus/impfberechtigt-bw/)
+> and make sure you are qualified for them. This bot doesn't help you get a privilege. It only allows you to get a date without losing the nerves or waisting a lifetime in pointless callcenter calls.  
+
+### What is Slack and do I need it?
+This bot can also work without it. [Slack](https://slack.com/) is a messaging application for companies. 
+It is useful to get realtime updates from the bot and to do the SMS verification without the need to be in front of your computer.
+Otherwise, when the verification starts, you have only 10 minutes left to type the code into the automated browser window.
+If you take a journey through the dangerous outside world, this may be unpractical. I have chosen Slack, because it proves a nice Java API
+and it was already running in our company.
 
 ## 🛠 Setup
 
 ### Selenium
 
 The Impf-Bot uses [Selenium](https://www.selenium.dev) to automate a webbrowser. Selenium requires a locally installed
-driver and browser - Chrome is recommended. You can manually download the leastest selenium drivers
+driver and browser - Chrome is recommended. You can manually download the latest selenium drivers
 on [GitHub - ChromeDriver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver)
 or use this Windows bash script to do it for you:
 
@@ -32,12 +46,12 @@ choco install selenium-chrome-driver
 
 ### `config.properties`
 Settings are stored in a config file which is located in: `src/main/resources/config.properties`.  
-Edit these settings before first start.
+Edit these settings before the first run.
 
 ```properties
 mainPageUrl = https://www.impfterminservice.de/impftermine
 # Comma separated list of locations. 
-# Optional, if you already have a placement code just add it in square brackets after the place 
+# Optional, if you already have a placement code, just add it in square brackets after the place 
 locations = 69124 Heidelberg[XXXX-XXXX-XXXX],76137 Karlsruhe
 # Your age. Used in age verification field.
 personAge = 42
