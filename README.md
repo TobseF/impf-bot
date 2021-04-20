@@ -75,7 +75,7 @@ slackBotChannel = #random
 ```
 
 ### Setup Slack
-This step is optional. You can find detailed setup instructions here: [SlackBot Setup](/doc/SLACK_SETUP.md).
+This step is optional. You can find detailed setup instructions here: [SlackBot Setup](/doc/slack_setup/SLACK_SETUP.md).
 
 ### `simplelogger.properties`
 
