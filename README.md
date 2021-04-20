@@ -74,6 +74,9 @@ slackBotApiToken = xoxb-123123123-123123123123123123123123123
 slackBotChannel = #random
 ```
 
+### Setup Slack
+This step is optional. You can find detailed setup instructions here: [SlackBot Setup](/doc/SLACK_SETUP.md).
+
 ### `simplelogger.properties`
 
 To change the Log-Level edit the `defaultLogLevel`:  
