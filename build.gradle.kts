@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.4.32"
-    id("com.github.johnrengelman.shadow").version("6.1.0")
+    id("com.github.johnrengelman.shadow").version("7.0.0")
 
     application
 }
@@ -41,11 +41,7 @@ tasks.withType<KotlinCompile>() {
 
 application() {
     applicationName = "ImpfBot"
-    /**
-     * Needed for the ShadowJar plugin which is not compatible with Gradle 7.0.
-     * Otherwise migrate it to: `mainClass.set("de.tfr.impf.StartKt")`
-     */
-    mainClassName = "de.tfr.impf.StartKt"
+    mainClass.set("de.tfr.impf.StartKt")
 }
 
 // Configure Shadow to output with normal jar file name:
