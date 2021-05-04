@@ -70,7 +70,7 @@ class ReportJob {
             locationPage.enterCodeSegment0(code)
             locationPage.searchForFreeDate()
             locationPage.searchForVaccinateDate()
-            if (locationPage.hasNoVaccinateDateAvailable()) {
+            if (locationPage.hasNoVaccinateDateAvailable() || locationPage.hasVacError()) {
                 log.debug { "Correct code, but not free vaccination slots: $location" }
             } else {
                 sendMessageFoundDates(location)
