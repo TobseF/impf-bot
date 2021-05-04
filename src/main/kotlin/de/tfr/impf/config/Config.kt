@@ -1,5 +1,7 @@
 package de.tfr.impf.config
 
+import java.util.concurrent.TimeUnit
+
 object Config : KProperties() {
 
     init {
@@ -15,6 +17,35 @@ object Config : KProperties() {
     fun locationList() = locations.split(",").map(this::parseLocation)
 
     val sendRequest: Boolean by lazyBoolProperty()
+
+    private val waitingTime: Long by lazyLongProperty()
+
+    /**
+     * Waiting time before checking the next location in milliseconds [ms]
+     */
+    fun waitingTime(): Long = TimeUnit.SECONDS.toMillis(waitingTime)
+
+    private val searchElementTimeout: Long by lazyLongProperty()
+
+    /**
+     * Timeout when searching an element on the page in milliseconds [ms]
+     */
+    fun searchElementTimeout(): Long = TimeUnit.SECONDS.toMillis(searchElementTimeout)
+
+    private val waitingTimeForUserAction: Long by lazyLongProperty()
+
+    private val waitingTimeForBrowser: Long by lazyLongProperty()
+
+    /**
+     * Explicit waiting time for browser updates in milliseconds [ms]
+     */
+    fun waitingTimeForBrowser(): Long = TimeUnit.SECONDS.toMillis(waitingTimeForBrowser)
+
+    /**
+     * Waiting time for a manual user interaction in milliseconds [ms]
+     */
+    fun waitingTimeForUserAction(): Long = TimeUnit.MINUTES.toMillis(waitingTimeForUserAction)
+
     val personAge: Int by lazyIntProperty()
     val email: String by lazyProperty()
 
@@ -26,8 +57,6 @@ object Config : KProperties() {
     val nameDriver: String by lazyProperty()
     val exeDriver: String by lazyProperty()
     val pathDriver: String by lazyProperty()
-    val timeOutDefault = 1600L
-    val timeOutLong = 6500L
 
     fun isSlackEnabled() = slackEnabled
     val slackBotApiToken: String by lazyProperty()

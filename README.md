@@ -7,7 +7,7 @@
 
 Searches the official "[ImpfterminService - Der Patientenservice 116117](https://www.impfterminservice.de/)" for free
 Corona vaccination slots. It can search multiple locations at once which can be provided in a list. When it finds a free slot, it
-can use Slack to send you a message.
+can use Slack to send you a message. All timings can be configured for your needs and to avoid blocking.
 
 📱 Also the SMS verification step is managed by a Slack bot. Simply write the verification code into the Slack channel:
 ```properties
@@ -53,6 +53,16 @@ mainPageUrl = https://www.impfterminservice.de/impftermine
 # Comma separated list of locations. 
 # Optional, if you already have a placement code, just add it in square brackets after the place 
 locations = 69124 Heidelberg[XXXX-XXXX-XXXX],76137 Karlsruhe
+
+# Waiting time before checking the next location in seconds [s]
+waitingTime = 120
+# Waiting time for a manual user interaction in minutes [m]
+waitingTimeForUserAction = 15
+# Timeout when searching an element on the page in seconds [s]
+searchElementTimeout = 16
+# Explicit waiting time for browser updates in seconds [s]
+waitingTimeForBrowser = 2
+
 # Your age. Used in age verification field.
 personAge = 42
 

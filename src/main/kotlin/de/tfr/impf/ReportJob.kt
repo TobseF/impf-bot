@@ -36,7 +36,7 @@ class ReportJob {
             } catch (e: Exception) {
                 log.error(e) { "Failed to check location: $location\n" + e.message }
             }
-            Thread.sleep(30 * 1000)
+            Thread.sleep(Config.waitingTime())
         }
     }
 
@@ -46,7 +46,7 @@ class ReportJob {
         val cookieNag = CookieNagComponent(driver)
         mainPage.isDisplayed()
         mainPage.chooseLocation(location.name)
-        Thread.sleep(500)
+        Thread.sleep(Config.waitingTimeForBrowser())
         cookieNag.acceptCookies()
         mainPage.submitLocation()
         val locationPage = LocationPage(driver)
@@ -85,7 +85,7 @@ class ReportJob {
         location: Config.Location
     ) {
         locationPage.askForClaim()
-        Thread.sleep(2000)
+        Thread.sleep(Config.waitingTimeForBrowser())
         cookieNag.acceptCookies()
         if (locationPage.isFull()) {
             log.debug { "Location: $location is full" }
@@ -93,7 +93,7 @@ class ReportJob {
             locationPage.checkCorrectPerson()
             locationPage.enterAge(personAge)
             locationPage.submitInput()
-            Thread.sleep(2000)
+            Thread.sleep(Config.waitingTimeForBrowser())
             if (locationPage.isFull()) {
                 log.debug { "Location: $location is full" }
             } else {
@@ -108,8 +108,7 @@ class ReportJob {
     }
 
     private fun waitLongForUserInput() {
-        val minutes = 20L
-        Thread.sleep(minutes * 60 * 1000)
+        Thread.sleep(Config.waitingTimeForUserAction())
     }
 
     private fun requestCode(location: Config.Location) {
@@ -136,7 +135,7 @@ class ReportJob {
         val slackClient = SlackClient()
         val minutes = 10
         val retries = minutes * 6
-        for (i in 0 .. retries) {
+        for (i in 0..retries) {
             val smsCode = slackClient.findLasSmsCode()
             if (smsCode != null) {
                 val smsVerificationPage = SmsVerificationPage(driver)
