@@ -16,6 +16,7 @@ object Config : KProperties() {
 
     val sendRequest: Boolean by lazyBoolProperty()
     val personAge: Int by lazyIntProperty()
+    val pauseFactor: Int by lazyIntProperty()
     val email: String by lazyProperty()
 
     /**

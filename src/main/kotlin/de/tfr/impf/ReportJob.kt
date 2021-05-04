@@ -36,7 +36,7 @@ class ReportJob {
             } catch (e: Exception) {
                 log.error(e) { "Failed to check location: $location\n" + e.message }
             }
-            Thread.sleep(30 * 1000)
+            Thread.sleep(Config.pauseFactor.toLong() * 30 * 1000)
         }
     }
 
@@ -46,7 +46,7 @@ class ReportJob {
         val cookieNag = CookieNagComponent(driver)
         mainPage.isDisplayed()
         mainPage.chooseLocation(location.name)
-        Thread.sleep(500)
+        Thread.sleep(Config.pauseFactor.toLong() * 500)
         cookieNag.acceptCookies()
         mainPage.submitLocation()
         val locationPage = LocationPage(driver)
@@ -85,7 +85,7 @@ class ReportJob {
         location: Config.Location
     ) {
         locationPage.askForClaim()
-        Thread.sleep(2000)
+        Thread.sleep(Config.pauseFactor.toLong() * 2000)
         cookieNag.acceptCookies()
         if (locationPage.isFull()) {
             log.debug { "Location: $location is full" }
@@ -93,7 +93,7 @@ class ReportJob {
             locationPage.checkCorrectPerson()
             locationPage.enterAge(personAge)
             locationPage.submitInput()
-            Thread.sleep(2000)
+            Thread.sleep(Config.pauseFactor.toLong() * 2000)
             if (locationPage.isFull()) {
                 log.debug { "Location: $location is full" }
             } else {
