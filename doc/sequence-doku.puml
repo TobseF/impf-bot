@@ -14,6 +14,11 @@ ImpfBot -> ImpfPortal: acceptCookies()
 
 ImpfBot -> ImpfPortal: submit(firstLocation)
 end
+group VirtualWaitingRoomPage
+ImpfBot -> ImpfPortal: checkIfWeHaveToWait()
+ImpfBot <-- ImpfPortal: Welcome in the new Virtual Waiting Room
+ImpfBot -> ImpfBot: take a coffee and wait
+end
 group LocationPage
 ImpfBot -> ImpfPortal: checkForFreeSlots()
 ImpfBot <-- ImpfPortal: Yes we have a free slot (or probably not)
