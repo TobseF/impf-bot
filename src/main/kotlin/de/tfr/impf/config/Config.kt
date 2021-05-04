@@ -36,6 +36,9 @@ object Config : KProperties() {
 
     private val waitingTimeForBrowser: Long by lazyLongProperty()
 
+    private val waitingTimeInWaitingRoom: Long by lazyLongProperty()
+
+
     /**
      * Explicit waiting time for browser updates in milliseconds [ms]
      */
@@ -45,6 +48,12 @@ object Config : KProperties() {
      * Waiting time for a manual user interaction in milliseconds [ms]
      */
     fun waitingTimeForUserAction(): Long = TimeUnit.MINUTES.toMillis(waitingTimeForUserAction)
+
+    /**
+     * Waiting time in Waiting Room in milliseconds [ms]
+     */
+    fun waitingTimeInWaitingRoom(): Long = TimeUnit.MINUTES.toMillis(waitingTimeInWaitingRoom)
+
 
     val personAge: Int by lazyIntProperty()
     val email: String by lazyProperty()

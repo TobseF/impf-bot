@@ -6,6 +6,7 @@ import de.tfr.impf.selenium.createDriver
 import de.tfr.impf.slack.SlackClient
 import mu.KotlinLogging
 import org.openqa.selenium.WebDriver
+import java.lang.System.currentTimeMillis
 
 val log = KotlinLogging.logger("ReportJob")
 
@@ -49,6 +50,9 @@ class ReportJob {
         Thread.sleep(Config.waitingTimeForBrowser())
         cookieNag.acceptCookies()
         mainPage.submitLocation()
+
+        takeASeatInWaitingRoom()
+
         val locationPage = LocationPage(driver)
         if (locationPage.isDisplayed()) {
             log.debug { "Changed to location page: $location" }
@@ -57,6 +61,15 @@ class ReportJob {
             } else {
                 checkClaim(locationPage, cookieNag, location)
             }
+        }
+    }
+
+    private fun takeASeatInWaitingRoom() {
+        val waitingRoom = WaitingRoomPage(driver)
+        val waitingTimeEnd = currentTimeMillis() + Config.waitingTimeInWaitingRoom()
+        while (waitingRoom.isDisplayed() && currentTimeMillis() < waitingTimeEnd) {
+            log.debug { "Waiting in WaitingRoomPage ..." }
+            Thread.sleep(Config.waitingTimeForBrowser())
         }
     }
 
