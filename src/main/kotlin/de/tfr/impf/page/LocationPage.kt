@@ -70,4 +70,7 @@ class LocationPage(driver: WebDriver) : AbstractPage(driver) {
     fun hasNoVaccinateDateAvailable(): Boolean =
         (findAnyBy("//span[@class='its-slot-pair-search-no-results']")?.isDisplayed) ?: false
 
+    fun hasVacError(): Boolean =
+        findAll("//span[contains(@class, 'text-pre-wrap') and contains(text(), 'Fehler')]").isNotEmpty()
+
 }
