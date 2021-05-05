@@ -14,6 +14,16 @@ can use Slack to send you a message. All timings can be configured for your need
 sms:999-999
 ```
 
+# ⭐ Features
+ ⭐ Full browser automation   
+ ⭐ No API Hacks  
+ ⭐ Telegram integration  
+ ⭐ Slack integration  
+ ⭐ Waiting room detection   
+ ⭐ Customizable by property file  
+ ⭐ Docker support to run it locally or in the cloud
+
+
 ![Sequence Digramm](doc/sequence-doku.png)
 These steps are repeated for every location. So it's no problem to check 14 locations at once.
 If the bot recognizes that no free slots are available, it waits 30 seconds and goes on to the next location.
@@ -31,6 +41,9 @@ If you take a journey through the dangerous outside world, this may be unpractic
 and it was already running in our company.
 
 ## 🛠 Setup
+
+### Java
+To build and run the bot you need at least a Java 14 installation.
 
 ### Selenium
 
@@ -105,9 +118,17 @@ To change the Log-Level edit the `defaultLogLevel`:
 ```shell
 gradle build
 ```
+The build creates runnable Java-fat-jar which contains all dependencies and the config:  
+`build/libs/impf-bot-1.0-SNAPSHOT-all.jar`
 
 ## 🚀 Start
 
+To run the bot, simply use the gradle command:
 ```shell
 gradle run
+```
+
+As an alternative, you can also start it with the fat-jar in the command line by:
+```shell
+java -jar build/libs/impf-bot-1.0-SNAPSHOT-all.jar 
 ```
