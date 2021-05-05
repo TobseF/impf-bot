@@ -4,6 +4,7 @@ import de.tfr.impf.config.Config
 import de.tfr.impf.page.*
 import de.tfr.impf.selenium.createDriver
 import de.tfr.impf.slack.SlackClient
+import de.tfr.impf.telegram.TelegramClient
 import mu.KotlinLogging
 import org.openqa.selenium.WebDriver
 import java.lang.System.currentTimeMillis
@@ -177,6 +178,8 @@ class ReportJob {
         log.info { message }
         if (Config.isSlackEnabled()) {
             SlackClient().sendMessage(message)
+        } else if (Config.isTelegramEnabled()){
+            TelegramClient().sendMessage(message)
         }
     }
 
