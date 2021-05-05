@@ -14,7 +14,7 @@ can use Slack to send you a message. All timings can be configured for your need
 sms:999-999
 ```
 
-# ⭐ Features
+## ⭐ Features
  ⭐ Full browser automation   
  ⭐ No API Hacks  
  ⭐ Telegram integration  

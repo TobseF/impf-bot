@@ -63,7 +63,7 @@ class SlackClient {
         sendToChannel(message)
     }
 
-    public fun acceptSms(code: String = "") {
+    fun acceptSms(code: String = "") {
         sendToSmsChannel(messageSsmOK + code);
     }
 

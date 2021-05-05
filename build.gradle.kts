@@ -18,19 +18,17 @@ repositories {
 
 dependencies {
     shadow(gradleApi())
-    testImplementation(kotlin("test-junit5"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
 
     implementation("org.seleniumhq.selenium:selenium-java:3.141.59")
     implementation("org.seleniumhq.selenium:selenium-support:3.141.59")
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.6")
-    implementation("org.whispersystems:signal-service-java:2.15.3")
     implementation("com.slack.api:slack-api-client:1.7.1")
-    implementation("com.slack.api:bolt:1.7.1")
-    implementation("com.slack.api:bolt-servlet:1.7.1")
     implementation("org.slf4j:slf4j-simple:1.7.30")
     implementation("com.github.elbekD:kt-telegram-bot:1.3.8")
+
+    testImplementation(kotlin("test-junit5"))
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
 }
 
 tasks.test {
