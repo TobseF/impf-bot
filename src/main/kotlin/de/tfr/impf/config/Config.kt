@@ -74,6 +74,12 @@ object Config : KProperties() {
     val slackBotChannelReadSmsName: String by lazyProperty()
     val slackBotChannelReadSmsId: String by lazyProperty()
 
+    fun isTelegramEnabled() = telegramEnabled
+    private val telegramEnabled: Boolean by lazyBoolProperty()
+    val telegramApiToken: String by lazyProperty()
+    val telegramBotUsername: String by lazyProperty()
+    val telegramChatId: String by lazyProperty()
+
     /**
      * @locationStatement location name with optional verification code in square brackets. e.g. "69123 Heidelberg[XXXX-XXXX-XXXX]]"
      */

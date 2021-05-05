@@ -21,10 +21,10 @@ If the bot recognizes that no free slots are available, it waits 30 seconds and 
 > ### ⚠ Warning: The online booking isn't an authorization
 > On the booking date you still have to bring the documents with you, to proof that you are qualified to receive the vaccination.
 > Check out [the official guidelines](https://sozialministerium.baden-wuerttemberg.de/de/gesundheit-pflege/gesundheitsschutz/infektionsschutz-hygiene/informationen-zu-coronavirus/impfberechtigt-bw/)
-> and make sure you are qualified for them. This bot doesn't help you get a privilege. It only allows you to get a date without losing the nerves or waisting a lifetime in pointless callcenter calls.  
+> and make sure you are qualified for them. This bot doesn't help you get a privilege. It only allows you to get a date without losing the nerves or waisting a lifetime in pointless callcenter calls.
 
 ### What is Slack and do I need it?
-This bot can also work without it. [Slack](https://slack.com/) is a messaging application for companies. 
+This bot can also work without it. [Slack](https://slack.com/) is a messaging application for companies.
 It is useful to get realtime updates from the bot and to do the SMS verification without the need to be in front of your computer.
 Otherwise, when the verification starts, you have only 10 minutes left to type the code into the automated browser window.
 If you take a journey through the dangerous outside world, this may be unpractical. I have chosen Slack, because it proves a nice Java API
@@ -89,8 +89,11 @@ slackBotChannel = #random
 ### Setup Slack
 This step is optional. You can find detailed setup instructions here: [SlackBot Setup](/doc/slack_setup/SLACK_SETUP.md).
 
+### Setup Telegram
+This step is optional. You can find detailed setup instructions here: [TelegramBot Setup](/doc/telegram_setup/TELEGRAM_SETUP.md).
+
 ### Docker
-To run this tool in Docker, follow this tutorial: [Docker](/doc/docker/DOCKER_SETUP.md).
+This step is optional. To run this tool in Docker, follow this tutorial: [Docker](/doc/docker/DOCKER_SETUP.md).
 
 ### `simplelogger.properties`
 
