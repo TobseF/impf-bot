@@ -89,6 +89,9 @@ slackBotChannel = #random
 ### Setup Slack
 This step is optional. You can find detailed setup instructions here: [SlackBot Setup](/doc/slack_setup/SLACK_SETUP.md).
 
+### Docker
+To run this tool in Docker, follow this tutorial: [Docker](/doc/docker/DOCKER_SETUP.md).
+
 ### `simplelogger.properties`
 
 To change the Log-Level edit the `defaultLogLevel`:  
