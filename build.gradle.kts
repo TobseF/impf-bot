@@ -13,6 +13,7 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 dependencies {
@@ -29,6 +30,7 @@ dependencies {
     implementation("com.slack.api:bolt:1.7.1")
     implementation("com.slack.api:bolt-servlet:1.7.1")
     implementation("org.slf4j:slf4j-simple:1.7.30")
+    implementation("com.github.elbekD:kt-telegram-bot:1.3.8")
 }
 
 tasks.test {
