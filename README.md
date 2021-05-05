@@ -92,6 +92,9 @@ This step is optional. You can find detailed setup instructions here: [SlackBot 
 ### Setup Telegram
 This step is optional. You can find detailed setup instructions here: [TelegramBot Setup](/doc/telegram_setup/TELEGRAM_SETUP.md).
 
+### Docker
+This step is optional. To run this tool in Docker, follow this tutorial: [Docker](/doc/docker/DOCKER_SETUP.md).
+
 ### `simplelogger.properties`
 
 To change the Log-Level edit the `defaultLogLevel`:  
