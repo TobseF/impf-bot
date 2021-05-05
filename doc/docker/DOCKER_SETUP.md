@@ -9,10 +9,11 @@ If your dont have an existing file, follow the config.properties guide in the ma
 <br>
 Now open the file in your favourite editor and edit the Chromedriver options to match the working ones for the container:
 <br>
-```
-pathDriver = /app
+
+```PathDriver = /app
 nameDriver = webdriver.chrome.driver
-exeDriver = chromedriver```
+exeDriver = chromedriver
+```
 
 <br><br>
 Now your are ready to go on with the quickstart or build the container yourself
@@ -38,6 +39,7 @@ in the root folder of the project.
 <br><br>
 
 Both options deploy a running container with the name impf-bot in the background.
+Congratulations, your container is now up- and running and searching for an appointment
 
 <br><br>
 To get logs from the container:
