@@ -8,13 +8,13 @@ If your dont have an existing file, follow the config.properties guide in the ma
 
 <br>
 Now open the file in your favourite editor and edit the Chromedriver options to match the working ones for the container:
-<br>
+<br><br>
 
-```PathDriver = /app
+```
+PathDriver = /app
 nameDriver = webdriver.chrome.driver
 exeDriver = chromedriver
 ```
-
 <br><br>
 Now your are ready to go on with the quickstart or build the container yourself
 <br><br>
