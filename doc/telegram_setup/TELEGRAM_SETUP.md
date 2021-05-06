@@ -19,6 +19,9 @@ Next send `/token` and select your newly created bot. Take the HTTP API token an
 set it as `telegramApiToken` in the config.
 
 ### 3. Obtain your chatId
+#### Via your own Bot
 Send @yourNewBot1334 a message, a simple Hello is enough.
 Now replace `$(HTTP-TOKEN)` in this link `https://api.telegram.org/bot$(HTTP-TOKEN)/getUpdates` and
 open it with a browser. Search for the "id" in this JSON response and save the number behind to the config.
+#### Via @myidbot
+Send a `/start` message to @myidbot (https://t.me/myidbot), followed by a `/getid` message. The bot will reply with your chat id. Put that to your config.
