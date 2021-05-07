@@ -35,11 +35,21 @@ replace ```./config.properties``` in docker-compose.yml with the path and filena
 
 ```docker-compose up -d```
 
-in the root folder of the project.
-<br><br>
+in the root folder of the project. 
+
 
 Both options deploy a running container with the name impf-bot in the background.
-Congratulations, your container is now up- and running and searching for an appointment
+Congratulations, your container is now up- and running and searching for an appointment  
+
+<br>
+### UI
+
+The container has two open ports: 5901 (vnc) and 6901 (web).
+
+If an appointment has been found or you want to check in on the process, 
+either connect to ```127.0.0.1:5901``` with a VNC Client of your choice
+or
+open ```127.0.0.1:6901``` in any available webbrowser
 
 <br><br>
 To get logs from the container:

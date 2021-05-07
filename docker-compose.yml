@@ -6,5 +6,8 @@ services:
         container_name: impf-bot
         volumes:
             - ./config.properties:/app/src/main/resources/config.properties
+        ports:
+            - 5901:5901
+            - 6901:6901
         restart: unless-stopped
     
