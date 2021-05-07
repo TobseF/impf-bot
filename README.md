@@ -109,9 +109,10 @@ This step is optional. You can find detailed setup instructions here: [TelegramB
 This step is optional. To run this tool in Docker, follow this tutorial: [Docker](/doc/docker/DOCKER_SETUP.md).
 
 ### `simplelogger.properties`
-
+Per default the bot logs only successful bookings.    
 To change the Log-Level edit the `defaultLogLevel`:  
-`org.slf4j.simpleLogger.defaultLogLevel = info`
+`org.slf4j.simpleLogger.defaultLogLevel = info`  
+| ℹ Change the log level to `debug` to get a more detailed output during every step.
 
 ## 🔨 Build
 
