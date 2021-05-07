@@ -56,6 +56,8 @@ either connect to ```127.0.0.1:5901``` with a VNC Client of your choice
 or
 open ```127.0.0.1:6901``` in any available webbrowser. This will give you full access to the webbrowser and allow you to input any data necessary.
 
+If it is asking for a password, input the one you set in the ```docker run``` command or the ```docker-compose.yml```. If you removed the environment variable, the default password is ```impf-bot```
+
 <br><br>
 To get logs from the container:
 
