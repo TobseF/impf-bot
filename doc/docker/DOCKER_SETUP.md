@@ -23,15 +23,19 @@ Now your are ready to go on with the quickstart or build the container yourself
 
 To simply run the container pre-built, either execute
 
-```docker run --name impf-bot -d -v $PWD/config.properties:/app/src/main/resources/config.properties pfuenzle/impf-bot```
+```docker run -e VNC_PASSWORD=CHANGEME --name impf-bot -d -p 5901:5901 -p 6901:6901 -v $PWD/config.properties:/app/src/main/resources/config.properties pfuenzle/impf-bot```
 
-and replace ```$PWD/config.properties``` with the path and filename to your properties file (if config.properties is not in your current path)
+and replace ```$PWD/config.properties``` with the path and filename to your properties file (if config.properties is not in your current path).
+
+Additionally, replace CHANGEME with a password for your VNC Server.
 <br><br>
 
 OR 
 <br><br>
 
-replace ```./config.properties``` in docker-compose.yml with the path and filename to your properties file (if config.properties is not in the same folder as docker-compose.yml) and then execute 
+replace ```./config.properties``` in docker-compose.yml with the path and filename to your properties file (if config.properties is not in the same folder as docker-compose.yml).
+
+After that, replace CHANGEME with the password for your VNC Server and then execute 
 
 ```docker-compose up -d```
 
@@ -42,14 +46,15 @@ Both options deploy a running container with the name impf-bot in the background
 Congratulations, your container is now up- and running and searching for an appointment  
 
 <br>
-### UI
+
+### UI  
 
 The container has two open ports: 5901 (vnc) and 6901 (web).
 
 If an appointment has been found or you want to check in on the process, 
 either connect to ```127.0.0.1:5901``` with a VNC Client of your choice
 or
-open ```127.0.0.1:6901``` in any available webbrowser
+open ```127.0.0.1:6901``` in any available webbrowser. This will give you full access to the webbrowser and allow you to input any data necessary.
 
 <br><br>
 To get logs from the container:
