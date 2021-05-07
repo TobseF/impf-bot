@@ -3,6 +3,9 @@ package de.tfr.impf.page
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
+/**
+ * Submit page for the SMS verification step.
+ */
 class SmsVerificationPage(driver: WebDriver) : AbstractPage(driver) {
 
     fun title(): WebElement? = findAnyBy("//h1")

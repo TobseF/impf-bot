@@ -4,6 +4,9 @@ import de.tfr.impf.config.Config
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
+/**
+ * Main page with location selection
+ */
 class MainPage(driver: WebDriver) : AbstractPage(driver) {
 
     fun open() {

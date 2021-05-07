@@ -80,6 +80,10 @@ object Config : KProperties() {
     val telegramBotUsername: String by lazyProperty()
     val telegramChatId: String by lazyProperty()
 
+    val userAgent: String by lazyProperty()
+
+    val hasUserAgent = userAgent.isNotEmpty() && userAgent != "default"
+
     /**
      * @locationStatement location name with optional verification code in square brackets. e.g. "69123 Heidelberg[XXXX-XXXX-XXXX]]"
      */
