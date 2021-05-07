@@ -5,6 +5,9 @@ services:
         image: pfuenzle/impf-bot
         container_name: impf-bot
         volumes:
-            - ./config.properties:/app/src/main/resources/config.properties
+            - ../config.properties:/app/src/main/resources/config.properties
+        ports:
+            - 5901:5901
+            - 6901:6901
         restart: unless-stopped
     
