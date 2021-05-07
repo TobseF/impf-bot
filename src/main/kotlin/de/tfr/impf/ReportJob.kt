@@ -84,11 +84,14 @@ class ReportJob {
             locationPage.enterCodeSegment0(code)
             locationPage.searchForFreeDate()
             locationPage.searchForVaccinateDate()
+            val bookingPage = BookingPage(driver)
             if (locationPage.hasNoVaccinateDateAvailable() || locationPage.hasVacError()) {
                 log.debug { "Correct code, but not free vaccination slots: $location" }
-            } else {
+            } else if (bookingPage.isDisplayed() && bookingPage.isDisplayingVaccinationDates()) {
                 sendMessageFoundDates(location)
                 waitLongForUserInput()
+            } else {
+                log.debug { "Correct code, we can't see the bookable vaccination dates: $location" }
             }
         }
     }
