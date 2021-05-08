@@ -21,8 +21,6 @@ class ReportJob {
     private val mobileNumber = Config.mobileNumber
     private val email = Config.email
 
-    private val readSmsFromSlack = true
-
     fun reportFreeSlots() {
         log.info { "Person age: $personAge" }
         log.info { "Started checking these ${locations.size} locations:\n$locations" }
@@ -137,7 +135,7 @@ class ReportJob {
             log.debug { "Reached request limit in $location" }
         } else {
             sendMessageFoundFreeSeats(location)
-            if (readSmsFromSlack) {
+            if (Config.isSlackEnabled() && Config.readSmsFromSlack) {
                 acceptSmsBySlackMessage(location)
             } else {
                 waitLongForUserInput()

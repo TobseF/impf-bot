@@ -16,23 +16,39 @@ open class KProperties {
         return properties.load(InputStreamReader(stream, "UTF-8"))
     }
 
-    fun getProperty(propertyKey: String): String {
+    fun getProperty(propertyKey: String): String? {
         return properties.getProperty(propertyKey)
-            ?: throw IllegalStateException("Failed finding property `$propertyKey`")
     }
 
     fun lazyProperty() = LazyProperty(this) { it }
     fun lazyIntProperty() = LazyProperty(this) { it.toInt() }
     fun lazyLongProperty() = LazyProperty(this) { it.toLong() }
-    fun lazyBoolProperty() = LazyProperty(this) { it.toBoolean() }
+    fun lazyBoolProperty() = LazyProperty(this, defaultValue = false) { it.toBoolean() }
 
-    open class LazyProperty<T>(private val props: KProperties, private val typeMapper: (String) -> T) {
-        private var value = ""
+    open class LazyProperty<T>(
+        private val props: KProperties,
+        private val defaultValue: T? = null,
+        private val typeMapper: (String) -> T
+    ) {
+        private var storedValue: T? = null
+
         operator fun getValue(thisRef: Any?, property: KProperty<*>): T {
-            if (value.isEmpty()) {
-                value = props.getProperty(property.name)
+            var value: T? = storedValue
+            return if (value == null) {
+                val valueFromFile = props.getProperty(property.name)
+                if (valueFromFile == null) {
+                    if (defaultValue == null) {
+                        throw IllegalStateException("Failed finding property `${property.name}`")
+                    }
+                    defaultValue
+                } else {
+                    val convertedValue = typeMapper.invoke(valueFromFile)
+                    storedValue = convertedValue
+                    convertedValue
+                }
+            } else {
+                value
             }
-            return typeMapper.invoke(value)
         }
     }
 

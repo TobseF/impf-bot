@@ -73,6 +73,7 @@ object Config : KProperties() {
     val slackBotChannel: String by lazyProperty()
     val slackBotChannelReadSmsName: String by lazyProperty()
     val slackBotChannelReadSmsId: String by lazyProperty()
+    val readSmsFromSlack: Boolean by lazyBoolProperty()
 
     fun isTelegramEnabled() = telegramEnabled
     private val telegramEnabled: Boolean by lazyBoolProperty()
