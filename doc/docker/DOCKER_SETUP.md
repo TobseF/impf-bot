@@ -11,7 +11,7 @@ Now open the file in your favourite editor and edit the Chromedriver options to 
 <br><br>
 
 ```
-PathDriver = /app
+pathDriver = /app/
 nameDriver = webdriver.chrome.driver
 exeDriver = chromedriver
 ```
