@@ -59,7 +59,7 @@ choco install selenium-chrome-driver
 
 ### `config.properties`
 Settings are stored in a config file which is located in: `src/main/resources/config.properties`.  
-Edit these settings before the first run.
+Edit these settings before the first run. A missing boolean property will be treated as `false`.
 
 ```properties
 mainPageUrl = https://www.impfterminservice.de/impftermine
@@ -97,6 +97,10 @@ slackEnabled = false
 # These can be skipped, if Slack is `slackEnabled = false`
 slackBotApiToken = xoxb-123123123-123123123123123123123123123
 slackBotChannel = #random
+# Also read the SMS back from a channel. Needs the slackBotChannelReadSms-Name and Id.
+readSmsFromSlack = false
+slackBotChannelReadSmsName = #smsgameway
+slackBotChannelReadSmsId = CE99999PY
 ```
 
 ### Setup Slack
