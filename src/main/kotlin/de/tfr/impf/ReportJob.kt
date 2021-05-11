@@ -76,8 +76,12 @@ class ReportJob {
         locationPage: LocationPage,
         location: Config.Location
     ) {
-        locationPage.confirmClaim()
         val code = location.placementCode
+        val serverCode = location.serverCode
+        if (serverCode != null) {
+            locationPage.switchToDifferentServer(serverCode)
+        }
+        locationPage.confirmClaim()
         if (code != null) {
             locationPage.enterCodeSegment0(code)
             locationPage.searchForFreeDate()
@@ -164,7 +168,7 @@ class ReportJob {
 
 
     private fun sendMessageFoundFreeSeats(location: Config.Location) {
-        val message = "Found free seats in location ${location.name}:${driver.currentUrl}" +
+        val message = "Found free seats in location ${location.name}:${driver.currentUrl}\n" +
                 "Five minutes left to send the sms verification"
         sendMessage(message)
     }

@@ -90,12 +90,14 @@ object Config : KProperties() {
      */
     private fun parseLocation(locationStatement: String): Location {
         val placementCode = locationStatement.substringAfter("[", "").substringBefore("]", "").ifEmpty { null }
+        val serverCode = locationStatement.substringAfter("(","").substringBefore(")", "").ifEmpty { null }
         val name = locationStatement.substringBefore("[")
-        return Location(name, placementCode)
+        return Location(name, placementCode, serverCode)
     }
 
-    class Location(val name: String, val placementCode: String?) {
+    class Location(val name: String, val placementCode: String?, val serverCode: String?) {
         fun hasCode() = placementCode != null
+        fun hasServerCode() = serverCode != null
 
         private fun getCodeSegment(index: Int): String = (placementCode?.split("-")?.get(index)).orEmpty()
         fun getCodeSegment0(): String = getCodeSegment(0)
