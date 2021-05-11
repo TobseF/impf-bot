@@ -63,9 +63,11 @@ Edit these settings before the first run. A missing boolean property will be tre
 
 ```properties
 mainPageUrl = https://www.impfterminservice.de/impftermine
-# Comma separated list of locations. 
-# Optional, if you already have a placement code, just add it in square brackets after the place 
+# Comma separated list of locations. Optional, if you already have a placement code just add it in square brackets after the place.
 locations = 69124 Heidelberg[XXXX-XXXX-XXXX],76137 Karlsruhe
+
+# Your age. Used in age verification field.
+personAge = 42
 
 # Waiting time before checking the next location in seconds [s]
 waitingTime = 120
@@ -78,29 +80,37 @@ searchElementTimeout = 16
 # Explicit waiting time for browser updates in seconds [s]
 waitingTimeForBrowser = 2
 
-# Your age. Used in age verification field.
-personAge = 42
-
-# Settings for the request page. Only needed if you set `sendRequest = true`  
-sendRequest = true
+# Settings for the request page. Only needed if you set `sendRequest = true`
+sendRequest = false
 email = impfMePlease@lasthope.de
 # Mobile number for sms verification. Numbers after the "+49"
 mobileNumber = 152123123123
 
-# Chrome Driver
-pathDriver = C:/ProgramData/chocolatey/lib/chromedriver/tools/
+# Selenium Chrome Driver Settings
+pathDriver = C:/ProgramData/chocolatey/bin/
 nameDriver = webdriver.chrome.driver
 exeDriver = chromedriver.exe
 
-# Enabled the slack messages
+# Enabled the Slack messages
 slackEnabled = false
-# These can be skipped, if Slack is `slackEnabled = false`
+# These can be skipped, if Slack is disabled
 slackBotApiToken = xoxb-123123123-123123123123123123123123123
 slackBotChannel = #random
 # Also read the SMS back from a channel. Needs the slackBotChannelReadSms-Name and Id.
 readSmsFromSlack = false
 slackBotChannelReadSmsName = #smsgameway
 slackBotChannelReadSmsId = CE99999PY
+
+# Enabled the Telegram messages
+telegramEnabled = false
+# These can be skipped, if Telegram is disabled
+telegramApiToken = 10000001:AAEMkawDRi5-_yX7fr-pxxxxxxxxx-2EOE
+telegramBotUsername = @iufdhsgouihsdfgbot
+telegramChatId = 1231231231
+
+# It seems that non windows agents are blocked. You can set it to "default" to use the default one of chrome.
+# Could be something like: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
+userAgent = default
 ```
 
 ### Setup Slack
