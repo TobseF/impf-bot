@@ -1,9 +1,12 @@
 package de.tfr.impf.page
 
+import mu.KotlinLogging
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
 class LocationPage(driver: WebDriver) : AbstractPage(driver) {
+
+    val log = KotlinLogging.logger("LocationPage")
 
     fun title(): WebElement? = findAnyBy("//h1")
 
@@ -72,5 +75,18 @@ class LocationPage(driver: WebDriver) : AbstractPage(driver) {
 
     fun hasVacError(): Boolean =
         findAll("//span[contains(@class, 'text-pre-wrap') and contains(text(), 'Fehler')]").isNotEmpty()
+
+    fun switchToDifferentServer(serverCode: String) {
+        if (!driver.currentUrl.contains("$serverCode-iz")) {
+            val url = driver.currentUrl
+            val newUrl = if (url.startsWith("https://")) {
+                url.replaceRange(8, 11, serverCode)
+            } else {
+                url.replaceRange(0, 2, serverCode)
+            }
+            log.debug("Redirect to distinct IZ Server. From: $url to: $newUrl")
+            driver.get(newUrl)
+        }
+    }
 
 }

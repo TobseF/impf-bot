@@ -63,8 +63,8 @@ Edit these settings before the first run. A missing boolean property will be tre
 
 ```properties
 mainPageUrl = https://www.impfterminservice.de/impftermine
-# Comma separated list of locations. Optional, if you already have a placement code just add it in square brackets after the place.
-locations = 69124 Heidelberg[XXXX-XXXX-XXXX],76137 Karlsruhe
+# Comma separated list of locations. Optional, if you already have a placement code just add it in square brackets after the place. Since placement codes are not related to locations but to servers you can furthermore optionally specify the related server code next to the placement code in parentheses. The server code can be found in the URL e.g. "001-iz.impfterminservice.de" -> server code == "001".
+locations = 69124 Heidelberg[XXXX-XXXX-XXXX](XXX),76137 Karlsruhe
 
 # Your age. Used in age verification field.
 personAge = 42

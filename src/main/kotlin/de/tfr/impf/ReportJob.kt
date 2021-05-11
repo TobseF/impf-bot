@@ -76,8 +76,12 @@ class ReportJob {
         locationPage: LocationPage,
         location: Config.Location
     ) {
-        locationPage.confirmClaim()
         val code = location.placementCode
+        val serverCode = location.serverCode
+        if (serverCode != null) {
+            locationPage.switchToDifferentServer(serverCode)
+        }
+        locationPage.confirmClaim()
         if (code != null) {
             locationPage.enterCodeSegment0(code)
             locationPage.searchForFreeDate()
