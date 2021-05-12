@@ -18,7 +18,7 @@ RUN unzip -d /opt/gradle /tmp/gradle-7.0-bin.zip
 
 RUN rm -rf /tmp/gradle-7.0-bin.zip
 
-RUN git clone https://github.com/TobseF/impf-bot.git
+RUN git clone https://github.com/c0rrre/impf-bot.git
 
 RUN mv impf-bot/* .
 
