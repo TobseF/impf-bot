@@ -45,9 +45,9 @@ class ReportJob {
         val mainPage = openMainPage(driver)
         val cookieNag = CookieNagComponent(driver)
         mainPage.isDisplayed()
+        cookieNag.acceptCookies()
         mainPage.chooseLocation(location.name)
         Thread.sleep(Config.waitingTimeForBrowser())
-        cookieNag.acceptCookies()
         mainPage.submitLocation()
 
         takeASeatInWaitingRoom()
@@ -76,6 +76,7 @@ class ReportJob {
         locationPage: LocationPage,
         location: Config.Location
     ) {
+    	val cookieNag = CookieNagComponent(driver)
         val code = location.placementCode
         val serverCode = location.serverCode
         if (serverCode != null) {
@@ -83,6 +84,7 @@ class ReportJob {
         }
         locationPage.confirmClaim()
         if (code != null) {
+            cookieNag.acceptCookies()
             locationPage.enterCodeSegment0(code)
             locationPage.searchForFreeDate()
             locationPage.searchForVaccinateDate()
