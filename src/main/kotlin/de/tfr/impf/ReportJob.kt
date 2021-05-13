@@ -23,6 +23,15 @@ class ReportJob {
 
     fun reportFreeSlots() {
         log.info { "Person age: $personAge" }
+        log.info { "Send requests: $sendRequest"}
+		log.info { "mobileNumber: $mobileNumber"}
+		log.info { "email: $email"}        
+        val message = "Starting search for free slots with the following data:\n" +
+				"Person age: $personAge \n" +
+				"Send requests: $sendRequest \n" +
+				"mobileNumber: $mobileNumber \n" +
+				"email: $email"
+		sendMessage(message)        
         log.info { "Started checking these ${locations.size} locations:\n$locations" }
         while (true) {
             checkLocations()
