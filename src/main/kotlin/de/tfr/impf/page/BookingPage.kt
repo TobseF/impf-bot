@@ -13,7 +13,7 @@ class BookingPage(driver: WebDriver) : AbstractPage(driver) {
     override fun isDisplayed() = title()?.text == "Onlinebuchung für Ihre Corona-Schutzimpfung"
 
     fun isDisplayingVaccinationDates(): Boolean {
-        return findAll("//div[contains(@class, 'its-search-step-title') and contains(text(), 'Impftermine')]").isNotEmpty()
+        return findAll("//*[contains(text(), '1. Impftermin')]").isNotEmpty()
     }
 
 }
