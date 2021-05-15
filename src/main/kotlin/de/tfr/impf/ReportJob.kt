@@ -204,7 +204,7 @@ class ReportJob {
         mainPage.open()
         log.debug { "Choose State: " + mainPage.chooseState()?.text }
         mainPage.chooseState()?.click()
-        mainPage.chooseStateItemBW()
+        mainPage.chooseStateItem(Config.state)
         return mainPage
     }
 }
