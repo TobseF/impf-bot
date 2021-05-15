@@ -9,6 +9,7 @@ object Config : KProperties() {
     }
 
     val mainPageUrl: String by lazyProperty()
+    val state: String by lazyProperty()
     private val locations: String by lazyProperty()
 
     /**
