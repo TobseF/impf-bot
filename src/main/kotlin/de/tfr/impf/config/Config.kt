@@ -9,6 +9,7 @@ object Config : KProperties() {
     }
 
     val mainPageUrl: String by lazyProperty()
+    val state: String by lazyProperty()
     private val locations: String by lazyProperty()
 
     /**
@@ -62,10 +63,6 @@ object Config : KProperties() {
      * Mobile number for sms verification. Numbers after the "+49"
      */
     val mobileNumber: String by lazyProperty()
-
-    val nameDriver: String by lazyProperty()
-    val exeDriver: String by lazyProperty()
-    val pathDriver: String by lazyProperty()
 
     fun isSlackEnabled() = slackEnabled
     val slackBotApiToken: String by lazyProperty()

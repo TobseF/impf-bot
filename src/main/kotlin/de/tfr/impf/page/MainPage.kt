@@ -17,8 +17,8 @@ class MainPage(driver: WebDriver) : AbstractPage(driver) {
 
     fun chooseLocation(): WebElement? = findAll("//span[@role='combobox']").getOrNull(1)
 
-    fun chooseStateItemBW() =
-        findAll("//li[@role='option' and contains(text() , 'Baden-Württemberg')]").firstOrNull()?.click()
+    fun chooseStateItem(stateName: String = "Baden-Württemberg") =
+        findAll("//li[@role='option' and contains(text() , '$stateName')]").firstOrNull()?.click()
 
     fun title(): WebElement = findBy("//h1")
 

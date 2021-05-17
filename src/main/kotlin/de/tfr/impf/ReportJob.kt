@@ -94,7 +94,9 @@ class ReportJob {
         locationPage.confirmClaim()
         if (code != null) {
             cookieNag.acceptCookies()
+            Thread.sleep(2_000)
             locationPage.enterCodeSegment0(code)
+            Thread.sleep(2_000)
             locationPage.searchForFreeDate()
             locationPage.searchForVaccinateDate()
             val bookingPage = BookingPage(driver)
@@ -204,7 +206,7 @@ class ReportJob {
         mainPage.open()
         log.debug { "Choose State: " + mainPage.chooseState()?.text }
         mainPage.chooseState()?.click()
-        mainPage.chooseStateItemBW()
+        mainPage.chooseStateItem(Config.state)
         return mainPage
     }
 }
