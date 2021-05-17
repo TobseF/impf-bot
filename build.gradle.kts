@@ -25,6 +25,7 @@ dependencies {
     implementation("com.slack.api:slack-api-client:1.7.1")
     implementation("org.slf4j:slf4j-simple:1.7.30")
     implementation("com.github.elbekD:kt-telegram-bot:1.3.8")
+    implementation("io.github.bonigarcia:webdrivermanager:4.4.3")
 
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
