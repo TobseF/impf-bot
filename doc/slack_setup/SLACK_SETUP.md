@@ -60,7 +60,7 @@ The link looks something like this `https://xxxxxx.slack.com/archives/CE728N1PY`
 
 Then fill them in channel properties in `config.properties` and set `slackEnabled = true`. 
 It's possible to use the same channel for `slackBotChannel` and `slackBotChannelReadSmsName`.
-The channel came starts with `#`, the id looks something like `CE728N1PY`.
+The channel name starts with `#`, the id looks something like `CE728N1PY`.
 
 ```properties
 slackBotChannel = #your-notification-channel
