@@ -48,14 +48,7 @@ To build and run the bot you need at least a Java 14 installation.
 ### Selenium
 
 The Impf-Bot uses [Selenium](https://www.selenium.dev) to automate a webbrowser. Selenium requires a locally installed
-driver and browser - Chrome is recommended. You can manually download the latest selenium drivers
-on [GitHub - ChromeDriver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver)
-or use this Windows bash script to do it for you:
-
-```shell
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-choco install selenium-chrome-driver
-```
+driver and browser - Chrome is recommended. The download of the chromedriver is done automatically via [WebDriverManager](https://github.com/bonigarcia/webdrivermanager).
 
 ### `config.properties`
 Settings are stored in a config file which is located in: `src/main/resources/config.properties`.  
@@ -87,11 +80,6 @@ sendRequest = false
 email = impfMePlease@lasthope.de
 # Mobile number for sms verification. Numbers after the "+49"
 mobileNumber = 152123123123
-
-# Selenium Chrome Driver Settings
-pathDriver = C:/ProgramData/chocolatey/bin/
-nameDriver = webdriver.chrome.driver
-exeDriver = chromedriver.exe
 
 # Enabled the Slack messages
 slackEnabled = false
