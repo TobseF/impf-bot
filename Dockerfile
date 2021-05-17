@@ -6,12 +6,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y unzip wget git default-jdk
 
 WORKDIR /app
 
-# download chromedriver
-RUN wget https://chromedriver.storage.googleapis.com/90.0.4430.24/chromedriver_linux64.zip && \
-    unzip chromedriver_linux64.zip && \
-    rm chromedriver_linux64.zip && \
-    # download gradle
-    wget https://services.gradle.org/distributions/gradle-7.0-bin.zip  -P /tmp/ && \
+# download gradle
+RUN wget https://services.gradle.org/distributions/gradle-7.0-bin.zip  -P /tmp/ && \
     unzip -d /opt/gradle /tmp/gradle-7.0-bin.zip && \
     rm -rf /tmp/gradle-7.0-bin.zip
 
