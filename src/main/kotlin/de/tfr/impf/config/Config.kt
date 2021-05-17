@@ -64,10 +64,6 @@ object Config : KProperties() {
      */
     val mobileNumber: String by lazyProperty()
 
-    val nameDriver: String by lazyProperty()
-    val exeDriver: String by lazyProperty()
-    val pathDriver: String by lazyProperty()
-
     fun isSlackEnabled() = slackEnabled
     val slackBotApiToken: String by lazyProperty()
     private val slackEnabled: Boolean by lazyBoolProperty()
