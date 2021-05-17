@@ -55,6 +55,7 @@ Then you are ready to install the app to your workspace.
 You need the channel name and to read from it also its id.
 To get the id of a channel either use `slackClient.listChannelIds()` in `SlackClient.kt` or right click the channel and choose "Copy link".
 The link looks something like this `https://xxxxxx.slack.com/archives/CE728N1PY` where `CE728N1PY` is your id.
+
 ![Screenshot-Kontextmenü-Slackchannel](images/step_get_id.png)
 
 Then fill them in channel properties in `config.properties` and set `slackEnabled = true`. 
