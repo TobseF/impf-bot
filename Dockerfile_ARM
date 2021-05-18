@@ -14,7 +14,7 @@ RUN wget https://services.gradle.org/distributions/gradle-7.0-bin.zip  -P /tmp/ 
 # copy whole folder into container
 COPY . .
 
-RUN sed -i -e 's/\ \ \ \ WebDriverManager.chromedriver().setup();/\ \ \ \ System.setProperty(\"webdriver.chrome.driver\", \"/app/chromedriver\")/g' src/main/kotlin/de/tfr/impf/selenium/DriverFactory.kt
+RUN sed -i -e 's/\ \ \ \ WebDriverManager.chromedriver().setup();/\ \ \ \ System.setProperty(\"webdriver.chrome.driver\", \"\/app\/chromedriver\")/g' src/main/kotlin/de/tfr/impf/selenium/DriverFactory.kt
 
 RUN sed -i -e 's/\ \ \ \ val\ chromeDriver\ =\ ChromeDriver(chromeOptions)/\ \ \ \ System.setProperty("webdriver.chrome.whitelistedIps", "");\n\ \ \ \ chromeOptions.addArguments\("--no-sandbox"\);\n\ \ \ \ chromeOptions.addArguments\("--disable-dev-shm-usage"\);\n\ \ \ \ val\ chromeDriver\ =\ ChromeDriver\(chromeOptions\)/g' src/main/kotlin/de/tfr/impf/selenium/DriverFactory.kt
 
