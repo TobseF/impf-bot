@@ -30,7 +30,7 @@ RUN echo "# XScreenSaver Preferences File\nmode:		off\nselected:  -1" > /root/.x
   chmod +x /root/.vnc/xstartup && \
   cat /root/.vnc/xstartup && \
   mv /usr/share/novnc/vnc.html /usr/share/novnc/index.html && \
-  echo "#!/bin/bash\nxmodmap -e \"keycode 22 = 5 percent\"\nxmodmap -e \"keycode 23 = 6\"\necho -n \${VNC_PASSWORD:-impf-bot} | vncpasswd -f > /root/.vnc/passwd\nchmod 400 ~/.vnc/passwd\n\nexport USER=root\nvncserver :1 -geometry 1920x1080 -depth 24 && websockify -D --web=/usr/share/novnc/ 6901 localhost:5901\ntail -f /app/impflog" > /root/vnc-startup.sh && \
+  echo "#!/bin/bash\nxmodmap -e \"keycode 22 = 5 percent\"\nxmodmap -e \"keycode 23 = 6\"\nsetxkbmap -option lv3:rwin_switch\necho -n \${VNC_PASSWORD:-impf-bot} | vncpasswd -f > /root/.vnc/passwd\nchmod 400 ~/.vnc/passwd\n\nexport USER=root\nvncserver :1 -geometry 1920x1080 -depth 24 && websockify -D --web=/usr/share/novnc/ 6901 localhost:5901\ntail -f /app/impflog" > /root/vnc-startup.sh && \
   chmod +x /root/vnc-startup.sh && \
   cat /root/vnc-startup.sh && \
   chmod go-rwx /root/.vnc 
