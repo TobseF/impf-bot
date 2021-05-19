@@ -2,7 +2,7 @@ FROM debian:buster
 
 # install apt dependencies
 RUN apt-get update -y
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y unzip wget git default-jdk chromium=90.0.4430.93-1~deb10u1 xorg tightvncserver autocutsel lxde-core novnc python-websockify 
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y unzip wget git default-jdk chromium=90.0.4430.212-1~deb10u1 xorg tightvncserver autocutsel lxde-core novnc python-websockify 
 
 WORKDIR /app
 
@@ -35,11 +35,11 @@ RUN echo "# XScreenSaver Preferences File\nmode:		off\nselected:  -1" > /root/.x
   cat /root/vnc-startup.sh && \
   chmod go-rwx /root/.vnc 
 
-RUN wget http://security.debian.org/debian-security/pool/updates/main/c/chromium/chromium-driver_90.0.4430.93-1~deb10u1_armhf.deb
+RUN wget http://security.debian.org/debian-security/pool/updates/main/c/chromium/chromium-driver_90.0.4430.212-1~deb10u1_armhf.deb
 
-RUN dpkg -i chromium-driver_90.0.4430.93-1~deb10u1_armhf.deb
+RUN dpkg -i chromium-driver_90.0.4430.212-1~deb10u1_armhf.deb
 
-RUN copy /usr/bin/chromedriver /app/chromedriver
+RUN cp /usr/bin/chromedriver /app/chromedriver
 
 EXPOSE 5901
 EXPOSE 6901
