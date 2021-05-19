@@ -14,7 +14,7 @@ RUN wget https://services.gradle.org/distributions/gradle-7.0-bin.zip  -P /tmp/ 
 # copy whole folder into container
 COPY . .
 
-RUN sed -i -e 's/\ \ \ \ WebDriverManager.chromedriver().setup();/\ \ \ \ System.setProperty(Config.nameDriver, Config.pathDriver + Config.exeDriver)/g' src/main/kotlin/de/tfr/impf/selenium/DriverFactory.kt
+RUN sed -i -e 's/\ \ \ \ WebDriverManager.chromedriver().setup();/\ \ \ \ System.setProperty(\"webdriver.chrome.driver\", \"\/app\/chromedriver\")/g' src/main/kotlin/de/tfr/impf/selenium/DriverFactory.kt
 
 RUN sed -i -e 's/\ \ \ \ val\ chromeDriver\ =\ ChromeDriver(chromeOptions)/\ \ \ \ System.setProperty("webdriver.chrome.whitelistedIps", "");\n\ \ \ \ chromeOptions.addArguments\("--no-sandbox"\);\n\ \ \ \ chromeOptions.addArguments\("--disable-dev-shm-usage"\);\n\ \ \ \ val\ chromeDriver\ =\ ChromeDriver\(chromeOptions\)/g' src/main/kotlin/de/tfr/impf/selenium/DriverFactory.kt
 
@@ -38,6 +38,8 @@ RUN echo "# XScreenSaver Preferences File\nmode:		off\nselected:  -1" > /root/.x
 RUN wget http://security.debian.org/debian-security/pool/updates/main/c/chromium/chromium-driver_90.0.4430.93-1~deb10u1_armhf.deb
 
 RUN dpkg -i chromium-driver_90.0.4430.93-1~deb10u1_armhf.deb
+
+RUN copy /usr/bin/chromedriver /app/chromedriver
 
 EXPOSE 5901
 EXPOSE 6901

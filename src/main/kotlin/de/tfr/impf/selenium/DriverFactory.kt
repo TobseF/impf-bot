@@ -11,7 +11,7 @@ fun createDriver(): ChromeDriver {
     WebDriverManager.chromedriver().setup();
     val chromeOptions = ChromeOptions()
     if (Config.hasUserAgent) {
-        chromeOptions.addArguments("general.useragent.override", Config.userAgent)
+        chromeOptions.addArguments("user-agent=" + Config.userAgent)
     }
     val chromeDriver = ChromeDriver(chromeOptions)
     chromeDriver.setTimeOut(Config.searchElementTimeout())
