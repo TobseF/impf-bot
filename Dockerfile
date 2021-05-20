@@ -2,7 +2,7 @@ FROM debian:buster
 
 # install apt dependencies
 RUN apt-get update -y
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y unzip wget git default-jdk chromium=90.0.4430.93-1~deb10u1 xorg vnc4server autocutsel lxde-core novnc python-websockify 
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y unzip wget git default-jdk chromium=90.0.4430.212-1~deb10u1 xorg vnc4server autocutsel lxde-core novnc python-websockify 
 
 WORKDIR /app
 
