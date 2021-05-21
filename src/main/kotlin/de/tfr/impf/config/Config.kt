@@ -78,6 +78,12 @@ object Config : KProperties() {
     val telegramBotUsername: String by lazyProperty()
     val telegramChatId: String by lazyProperty()
 
+    fun isSendgridEnabled() = sendgridEnabled
+    private val sendgridEnabled: Boolean by lazyBoolProperty()
+    val sendgridApiToken: String by lazyProperty()
+    val sendgridEmailFrom: String by lazyProperty()
+    val sendgridEmailTo: String by lazyProperty()
+
     val userAgent: String by lazyProperty()
 
     val hasUserAgent = userAgent.isNotEmpty() && userAgent != "default"
