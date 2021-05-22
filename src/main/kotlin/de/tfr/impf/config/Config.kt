@@ -58,7 +58,6 @@ object Config : KProperties() {
 
     val personAge: Int by lazyIntProperty()
     val email: String by lazyProperty()
-    val gmail: String by lazyProperty()
 
     /**
      * Mobile number for sms verification. Numbers after the "+49"
