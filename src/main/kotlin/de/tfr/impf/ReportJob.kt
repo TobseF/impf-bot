@@ -1,6 +1,7 @@
 package de.tfr.impf
 
 import de.tfr.impf.config.Config
+import de.tfr.impf.gmail.GmailClient
 import de.tfr.impf.page.*
 import de.tfr.impf.selenium.createDriver
 import de.tfr.impf.sendgrid.SendgridClient
@@ -204,6 +205,9 @@ class ReportJob {
             }
             Config.isSendgridEnabled() -> {
                 SendgridClient().sendMessage(message)
+            }
+            Config.isGmailEnabled() -> {
+                GmailClient().sendMessage(message)
             }
         }
     }

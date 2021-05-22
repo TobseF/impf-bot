@@ -98,6 +98,22 @@ telegramApiToken = 10000001:AAEMkawDRi5-_yX7fr-pxxxxxxxxx-2EOE
 telegramBotUsername = @iufdhsgouihsdfgbot
 telegramChatId = 1231231231
 
+# Enabled the Twilio Sendgrid email messages
+sendgridEnabled = false
+# These can be skipped, if Sendgrid is disabled
+sendgridApiToken = SG.aaaaaaaaaaaaaaaaaaaaaa.bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+sendgridEmailFrom = from@email.com
+sendgridEmailTo = to@email.com
+
+# Enabled the Gmail email messages
+gmailEnabled = false
+# These can be skipped, if Gmail is disabled
+gmailAppPassword = xxxxxxxxxxxxxxxx
+gmailEmailFrom = from@gmail.com
+# Can be the same as the from email
+gmailEmailTo = to@email.com
+
+
 # It seems that non windows agents are blocked. You can set it to "default" to use the default one of chrome.
 # Could be something like: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
 userAgent = default
@@ -108,6 +124,9 @@ This step is optional. You can find detailed setup instructions here: [SlackBot 
 
 ### Setup Telegram
 This step is optional. You can find detailed setup instructions here: [TelegramBot Setup](/doc/telegram_setup/TELEGRAM_SETUP.md).
+
+### Setup Gmail
+This step is optional. You can find detailed setup instructions here: [Gmail Setup](/doc/gmail_setup/GMAIL_SETUP.md).
 
 ### Docker
 This step is optional. To run this tool in Docker, follow this tutorial: [Docker](/doc/docker/DOCKER_SETUP.md).
