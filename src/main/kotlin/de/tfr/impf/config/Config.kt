@@ -58,6 +58,7 @@ object Config : KProperties() {
 
     val personAge: Int by lazyIntProperty()
     val email: String by lazyProperty()
+    val gmail: String by lazyProperty()
 
     /**
      * Mobile number for sms verification. Numbers after the "+49"
@@ -83,6 +84,12 @@ object Config : KProperties() {
     val sendgridApiToken: String by lazyProperty()
     val sendgridEmailFrom: String by lazyProperty()
     val sendgridEmailTo: String by lazyProperty()
+
+    fun isGmailEnabled() = gmailEnabled
+    private val gmailEnabled: Boolean by lazyBoolProperty()
+    val gmailAppPassword: String by lazyProperty()
+    val gmailEmailFrom: String by lazyProperty()
+    val gmailEmailTo: String by lazyProperty()
 
     val userAgent: String by lazyProperty()
 
