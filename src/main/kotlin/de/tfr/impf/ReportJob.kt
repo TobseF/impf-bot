@@ -53,8 +53,8 @@ class ReportJob {
 
 
     private fun checkLocation(location: Config.Location) {
-        val mainPage = openMainPage(driver)
         val cookieNag = CookieNagComponent(driver)
+        val mainPage = openMainPage(driver, cookieNag)
         mainPage.isDisplayed()
         cookieNag.acceptCookies()
         mainPage.chooseLocation(location.name)
@@ -212,10 +212,11 @@ class ReportJob {
         }
     }
 
-    private fun openMainPage(driver: WebDriver): MainPage {
+    private fun openMainPage(driver: WebDriver, cookieNag: CookieNagComponent): MainPage {
         val mainPage = MainPage(driver)
         mainPage.open()
         log.debug { "Choose State: " + mainPage.chooseState()?.text }
+        cookieNag.acceptCookies()
         mainPage.chooseState()?.click()
         mainPage.chooseStateItem(Config.state)
         return mainPage
