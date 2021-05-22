@@ -3,6 +3,7 @@ package de.tfr.impf
 import de.tfr.impf.config.Config
 import de.tfr.impf.page.*
 import de.tfr.impf.selenium.createDriver
+import de.tfr.impf.sendgrid.SendgridClient
 import de.tfr.impf.slack.SlackClient
 import de.tfr.impf.telegram.TelegramClient
 import mu.KotlinLogging
@@ -23,15 +24,15 @@ class ReportJob {
 
     fun reportFreeSlots() {
         log.info { "Person age: $personAge" }
-        log.info { "Send requests: $sendRequest"}
-		log.info { "mobileNumber: $mobileNumber"}
-		log.info { "email: $email"}        
+        log.info { "Send requests: $sendRequest" }
+        log.info { "mobileNumber: $mobileNumber" }
+        log.info { "email: $email" }
         val message = "Starting search for free slots with the following data:\n" +
-				"Person age: $personAge \n" +
-				"Send requests: $sendRequest \n" +
-				"mobileNumber: $mobileNumber \n" +
-				"email: $email"
-		sendMessage(message)        
+                "Person age: $personAge \n" +
+                "Send requests: $sendRequest \n" +
+                "mobileNumber: $mobileNumber \n" +
+                "email: $email"
+        sendMessage(message)
         log.info { "Started checking these ${locations.size} locations:\n$locations" }
         while (true) {
             checkLocations()
@@ -85,7 +86,7 @@ class ReportJob {
         locationPage: LocationPage,
         location: Config.Location
     ) {
-    	val cookieNag = CookieNagComponent(driver)
+        val cookieNag = CookieNagComponent(driver)
         val code = location.placementCode
         val serverCode = location.serverCode
         if (serverCode != null) {
@@ -194,10 +195,16 @@ class ReportJob {
 
     private fun sendMessage(message: String) {
         log.info { message }
-        if (Config.isSlackEnabled()) {
-            SlackClient().sendMessage(message)
-        } else if (Config.isTelegramEnabled()){
-            TelegramClient().sendMessage(message)
+        when {
+            Config.isSlackEnabled() -> {
+                SlackClient().sendMessage(message)
+            }
+            Config.isTelegramEnabled() -> {
+                TelegramClient().sendMessage(message)
+            }
+            Config.isSendgridEnabled() -> {
+                SendgridClient().sendMessage(message)
+            }
         }
     }
 

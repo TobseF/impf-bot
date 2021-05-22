@@ -23,6 +23,7 @@ dependencies {
     implementation("org.seleniumhq.selenium:selenium-support:3.141.59")
     implementation("io.github.microutils:kotlin-logging-jvm:2.0.6")
     implementation("com.slack.api:slack-api-client:1.7.1")
+    implementation("com.sendgrid:sendgrid-java:4.0.1")
     implementation("org.slf4j:slf4j-simple:1.7.30")
     implementation("com.github.elbekD:kt-telegram-bot:1.3.8")
     implementation("io.github.bonigarcia:webdrivermanager:4.4.3")
