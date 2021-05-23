@@ -90,6 +90,12 @@ object Config : KProperties() {
     val gmailEmailFrom: String by lazyProperty()
     val gmailEmailTo: String by lazyProperty()
 
+    fun isAlarmEnabled() = alarmEnabled
+    private val alarmEnabled: Boolean by lazyBoolProperty()
+    val alarmDuration: Int by lazyIntProperty()
+    val alarmFrequency: Int by lazyIntProperty()
+    val alarmVolumeInPercentage: Double by lazyDoubleProperty()
+
     val userAgent: String by lazyProperty()
 
     val hasUserAgent = userAgent.isNotEmpty() && userAgent != "default"

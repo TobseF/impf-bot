@@ -1,5 +1,6 @@
 package de.tfr.impf
 
+import de.tfr.impf.alarm.Alarm
 import de.tfr.impf.config.Config
 import de.tfr.impf.gmail.GmailClient
 import de.tfr.impf.page.*
@@ -196,6 +197,9 @@ class ReportJob {
 
     private fun sendMessage(message: String) {
         log.info { message }
+        if(Config.isAlarmEnabled()){
+            Alarm().alert()
+        }
         when {
             Config.isSlackEnabled() -> {
                 SlackClient().sendMessage(message)
