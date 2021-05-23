@@ -84,6 +84,12 @@ object Config : KProperties() {
     val sendgridEmailFrom: String by lazyProperty()
     val sendgridEmailTo: String by lazyProperty()
 
+    fun isGmailEnabled() = gmailEnabled
+    private val gmailEnabled: Boolean by lazyBoolProperty()
+    val gmailAppPassword: String by lazyProperty()
+    val gmailEmailFrom: String by lazyProperty()
+    val gmailEmailTo: String by lazyProperty()
+
     val userAgent: String by lazyProperty()
 
     val hasUserAgent = userAgent.isNotEmpty() && userAgent != "default"
