@@ -64,6 +64,18 @@ object Config : KProperties() {
      */
     val mobileNumber: String by lazyProperty()
 
+    // TODO: add comments here
+    val autoSelectFirstVaccinationDate: Boolean by lazyBoolProperty()
+    val personalDataSalutation: String by lazyProperty()
+    val personalDataFirstname: String by lazyProperty()
+    val personalDataLastname: String by lazyProperty()
+    val personalDataZipcode: Int by lazyIntProperty()
+    val personalDataCity: String by lazyProperty()
+    val personalDataStreet: String by lazyProperty()
+    val personalDataHouseNumber: String by lazyProperty()
+    val personalDataMobileNumber: String by lazyProperty()
+    val personalDataEmail: String by lazyProperty()
+
     fun isSlackEnabled() = slackEnabled
     val slackBotApiToken: String by lazyProperty()
     private val slackEnabled: Boolean by lazyBoolProperty()
