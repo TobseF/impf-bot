@@ -23,6 +23,7 @@ open class KProperties {
     fun lazyProperty() = LazyProperty(this) { it }
     fun lazyIntProperty() = LazyProperty(this) { it.toInt() }
     fun lazyLongProperty() = LazyProperty(this) { it.toLong() }
+    fun lazyDoubleProperty() = LazyProperty(this) { it.toDouble() }
     fun lazyBoolProperty() = LazyProperty(this, defaultValue = false) { it.toBoolean() }
 
     open class LazyProperty<T>(
