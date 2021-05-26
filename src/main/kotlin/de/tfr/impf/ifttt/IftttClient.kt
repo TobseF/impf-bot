@@ -1,6 +1,7 @@
 package de.tfr.impf.ifttt
 
 import de.tfr.impf.config.Config
+import de.tfr.impf.sendgrid.log
 import java.net.HttpURLConnection
 import java.net.URI
 import java.net.URL
@@ -14,7 +15,7 @@ class IftttClient {
         val apiKey = Config.iftttApiKey
         val eventName = Config.iftttEventName
 
-        val values = mapOf("value1" to message, "value2" to "test", "value3" to "https://google.de/")
+        val values = mapOf("value1" to message, "value2" to "https://116117.app/")
 
         val client = HttpClient.newBuilder().build();
         val request = HttpRequest.newBuilder()
@@ -22,9 +23,8 @@ class IftttClient {
             .POST(formData(values))
             .header("Content-Type", "application/x-www-form-urlencoded")
             .build()
-        val response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        println(response.body())
-
+        client.send(request, HttpResponse.BodyHandlers.ofString());
+        log.info { "Notification via IFTTT sent successfully." }
     }
 }
 
@@ -37,4 +37,3 @@ fun formData(data: Map<String, String>): HttpRequest.BodyPublisher? {
 
     return HttpRequest.BodyPublishers.ofString(res)
 }
-
