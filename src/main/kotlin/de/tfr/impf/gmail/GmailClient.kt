@@ -1,10 +1,12 @@
 package de.tfr.impf.gmail
 
 import de.tfr.impf.config.Config
-import de.tfr.impf.sendgrid.log
+import mu.KotlinLogging
 import org.apache.commons.mail.DefaultAuthenticator
 import org.apache.commons.mail.EmailException
 import org.apache.commons.mail.HtmlEmail
+
+val log = KotlinLogging.logger("GmailClient")
 
 class GmailClient {
     private val gmailAppPassword = Config.gmailAppPassword

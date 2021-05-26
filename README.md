@@ -133,6 +133,9 @@ This step is optional. You can find detailed setup instructions here: [TelegramB
 ### Setup Gmail
 This step is optional. You can find detailed setup instructions here: [Gmail Setup](/doc/gmail_setup/GMAIL_SETUP.md).
 
+### Setup Ifttt
+This step is optional. You can find detailed setup instructions here: [Ifttt Setup](/doc/ifttt_setup/IFTTT_SETUP.md).
+
 ### Docker
 This step is optional. To run this tool in Docker, follow this tutorial: [Docker](/doc/docker/DOCKER_SETUP.md).
 
