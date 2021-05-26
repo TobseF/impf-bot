@@ -27,7 +27,9 @@ class ReportJob {
     private val sendRequest = Config.sendRequest
     private val mobileNumber = Config.mobileNumber
     private val email = Config.email
-    private val autoSelectFirstVaccinationDate = Config.autoSelectFirstVaccinationDate
+    private val bookingEnabled = Config.bookingEnabled
+    private val takeScreenshots = Config.takeScreenshots
+    private val outputPath = Config.outputPath
     private val personalDataSalutation = Config.personalDataSalutation
     private val personalDataFirstname = Config.personalDataFirstname
     private val personalDataLastname = Config.personalDataLastname
@@ -48,7 +50,6 @@ class ReportJob {
                 "Send requests: $sendRequest \n" +
                 "mobileNumber: $mobileNumber \n" +
                 "email: $email"
-        // TODO: add config data here too
         sendMessage(message)
         log.info { "Started checking these ${locations.size} locations:\n$locations" }
         while (true) {
@@ -122,7 +123,7 @@ class ReportJob {
             } else if (bookingPage.isDisplayed() && bookingPage.isDisplayingVaccinationDates()) {
                 sendMessageFoundDates(location)
 
-                if (autoSelectFirstVaccinationDate) {
+                if (bookingEnabled) {
                     // 1. Select first date possible
                     Thread.sleep(2_000)
                     bookingPage.selectFirstVaccinationDatePair()
@@ -200,8 +201,10 @@ class ReportJob {
     }
 
     private fun takeScreenshot(driver: WebDriver, fileName: String) {
-        val screenshot: File = (driver as TakesScreenshot).getScreenshotAs(OutputType.FILE)
-        FileUtils.copyFile(screenshot, File("${FileUtils.getUserDirectoryPath()}/Desktop/$fileName"))
+        if (takeScreenshots) {
+            val screenshot: File = (driver as TakesScreenshot).getScreenshotAs(OutputType.FILE)
+            FileUtils.copyFile(screenshot, File("${outputPath.ifEmpty { FileUtils.getUserDirectoryPath() }}/$fileName"))
+        }
     }
 
     private fun checkClaim(
