@@ -113,6 +113,11 @@ gmailEmailFrom = from@gmail.com
 # Can be the same as the from email
 gmailEmailTo = to@email.com
 
+# Enabled the IFTTT notifications
+iftttEnabled = false
+# These can be skipped, if IFTTT is disabled
+iftttApiKey = xxxxxxxxxxxxxxxx
+iftttEventName = notify
 
 # It seems that non windows agents are blocked. You can set it to "default" to use the default one of chrome.
 # Could be something like: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
