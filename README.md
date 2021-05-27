@@ -113,6 +113,12 @@ gmailEmailFrom = from@gmail.com
 # Can be the same as the from email
 gmailEmailTo = to@email.com
 
+# Enabled the IFTTT notifications
+iftttEnabled = false
+# These can be skipped, if IFTTT is disabled
+iftttApiKey = xxxxxxxxxxxxxxxx
+iftttEventName = notify
+
 # Enabled alarm sound.
 # Alarm will be played on start and in addition to an enabled notification service.
 alarmEnabled = false
@@ -162,6 +168,9 @@ This step is optional. You can find detailed setup instructions here: [TelegramB
 
 ### Setup Gmail
 This step is optional. You can find detailed setup instructions here: [Gmail Setup](/doc/gmail_setup/GMAIL_SETUP.md).
+
+### Setup Ifttt
+This step is optional. You can find detailed setup instructions here: [Ifttt Setup](/doc/ifttt_setup/IFTTT_SETUP.md).
 
 ### Docker
 This step is optional. To run this tool in Docker, follow this tutorial: [Docker](/doc/docker/DOCKER_SETUP.md).

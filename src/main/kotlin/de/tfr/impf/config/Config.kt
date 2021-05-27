@@ -149,6 +149,11 @@ object Config : KProperties() {
     val gmailEmailFrom: String by lazyProperty()
     val gmailEmailTo: String by lazyProperty()
 
+    fun isIFTTTEnabled() = iftttEnabled
+    private val iftttEnabled: Boolean by lazyBoolProperty()
+    val iftttApiKey: String by lazyProperty()
+    val iftttEventName: String by lazyProperty()
+
     fun isAlarmEnabled() = alarmEnabled
     private val alarmEnabled: Boolean by lazyBoolProperty()
     val alarmDuration: Int by lazyIntProperty()

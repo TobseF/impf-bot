@@ -3,6 +3,7 @@ package de.tfr.impf
 import de.tfr.impf.alarm.Alarm
 import de.tfr.impf.config.Config
 import de.tfr.impf.gmail.GmailClient
+import de.tfr.impf.ifttt.IftttClient
 import de.tfr.impf.page.*
 import de.tfr.impf.selenium.createDriver
 import de.tfr.impf.sendgrid.SendgridClient
@@ -305,6 +306,9 @@ class ReportJob {
             }
             Config.isGmailEnabled() -> {
                 GmailClient().sendMessage(message)
+            }
+            Config.isIFTTTEnabled() -> {
+                IftttClient().sendMessage(message)
             }
         }
     }
