@@ -113,6 +113,11 @@ gmailEmailFrom = from@gmail.com
 # Can be the same as the from email
 gmailEmailTo = to@email.com
 
+# Enabled the IFTTT notifications
+iftttEnabled = false
+# These can be skipped, if IFTTT is disabled
+iftttApiKey = xxxxxxxxxxxxxxxx
+iftttEventName = notify
 
 # It seems that non windows agents are blocked. You can set it to "default" to use the default one of chrome.
 # Could be something like: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
@@ -127,6 +132,9 @@ This step is optional. You can find detailed setup instructions here: [TelegramB
 
 ### Setup Gmail
 This step is optional. You can find detailed setup instructions here: [Gmail Setup](/doc/gmail_setup/GMAIL_SETUP.md).
+
+### Setup Ifttt
+This step is optional. You can find detailed setup instructions here: [Ifttt Setup](/doc/ifttt_setup/IFTTT_SETUP.md).
 
 ### Docker
 This step is optional. To run this tool in Docker, follow this tutorial: [Docker](/doc/docker/DOCKER_SETUP.md).
