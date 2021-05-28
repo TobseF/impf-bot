@@ -7,9 +7,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y unzip wget git default-jdk
 WORKDIR /app
 
 # download gradle
-RUN wget https://services.gradle.org/distributions/gradle-7.0-bin.zip  -P /tmp/ && \
-    unzip -d /opt/gradle /tmp/gradle-7.0-bin.zip && \
-    rm -rf /tmp/gradle-7.0-bin.zip
+RUN wget https://services.gradle.org/distributions/gradle-7.0.2-bin.zip  -P /tmp/ && \
+    unzip -d /opt/gradle /tmp/gradle-7.0.2-bin.zip && \
+    rm -rf /tmp/gradle-7.0.2-bin.zip
 
 # copy whole folder into container
 COPY . .
