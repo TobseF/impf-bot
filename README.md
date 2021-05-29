@@ -23,7 +23,14 @@ sms:999-999
  ⭐ Customizable by property file  
  ⭐ Docker support to run it locally or in the cloud
 
+## 🤩 Thank You
+This bot exits and became so useful because of the over 20 people who contributed to this project.
+That is strength of open-source power 💪  
+![zaanposni](https://avatars.githubusercontent.com/u/24491035?v=4&s=42) ![fabicodes](https://avatars.githubusercontent.com/u/1745612?v=4&s=42) ![atpanos](https://avatars.githubusercontent.com/u/24278584?v=4&s=42) ![philib](https://avatars.githubusercontent.com/u/7396985?v=4&s=42) ![s01iD](https://avatars.githubusercontent.com/u/811984?v=4&s=42) ![superflo22](https://avatars.githubusercontent.com/u/26706262?v=4&s=42) ![seppi91](https://avatars.githubusercontent.com/u/4396900?v=4&s=42) ![alfonsrv](https://avatars.githubusercontent.com/u/48770755?v=4&s=42) ![schniggie](https://avatars.githubusercontent.com/u/637619?v=4&s=42) ![h0nIg](https://avatars.githubusercontent.com/u/2757302?v=4&s=42) ![Timwun](https://avatars.githubusercontent.com/u/13067978?v=4&s=42) ![TobseF](https://avatars.githubusercontent.com/u/1190109?v=4&s=42)  
+So any thanks has to go to all contributors.  
+If anybody still wants to honor the initial publish you can [buy Tobse a choco donut](https://www.buymeacoffee.com/tobse) 🍩. 
 
+## 🧭 Overview
 ![Sequence Digramm](doc/sequence-doku.png)
 These steps are repeated for every location. So it's no problem to check 14 locations at once.
 If the bot recognizes that no free slots are available, it waits 30 seconds and goes on to the next location.
