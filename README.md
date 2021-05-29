@@ -119,6 +119,42 @@ iftttEnabled = false
 iftttApiKey = xxxxxxxxxxxxxxxx
 iftttEventName = notify
 
+# Enabled alarm sound.
+# Alarm will be played on start and in addition to an enabled notification service.
+alarmEnabled = false
+# Alarm duration in msec
+alarmDuration = 2000
+# Tone frequency in hz
+alarmFrequency = 800
+# Volume in percentage (0.0-1.0)
+alarmVolumeInPercentage = 0.5
+
+# Automatically selects the first possible vaccination date and enters all required personal data based on the following values to book this vaccination slot for you.
+bookingEnabled = false
+# Takes screenshots during booking process to have proof of you booking. (Optional)
+takeScreenshots = false
+# Defines the path were all screenshots will be stored in (Optional). Files will be prefixed with "impf-bot-"
+outputPath = /home
+# Personal Data
+# Salutation (m=man, w=women, d=divers, c=child)
+personalDataSalutation = m
+# Firstname
+personalDataFirstname = Max
+# Lastname
+personalDataLastname = Mustermann
+# Zipcode
+personalDataZipcode = 69124
+# City
+personalDataCity = Heidelberg
+# Street
+personalDataStreet = Hauptstraße
+# House number
+personalDataHouseNumber = 911
+# Phone number. Numbers after the "+49"
+personalDataMobileNumber = 152123123123
+# E-Mail
+personalDataEmail = impfMePlease@lasthope.de
+
 # It seems that non windows agents are blocked. You can set it to "default" to use the default one of chrome.
 # Could be something like: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"
 userAgent = default
