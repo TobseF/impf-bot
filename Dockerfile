@@ -18,13 +18,13 @@ RUN sed -i -e 's/\ \ \ \ val\ chromeDriver\ =\ ChromeDriver(chromeOptions)/\ \ \
 
 # run gradle build
 RUN cat src/main/kotlin/de/tfr/impf/selenium/DriverFactory.kt && \
-    /opt/gradle/gradle-7.0/bin/gradle build && \
+    /opt/gradle/gradle-7.0.2/bin/gradle build -x test && \
     cat src/main/kotlin/de/tfr/impf/selenium/DriverFactory.kt
 
 # setup vnc
 RUN echo "# XScreenSaver Preferences File\nmode:		off\nselected:  -1" > /root/.xscreensaver && \
   cat /root/.xscreensaver && mkdir /root/.vnc/ && \
-  echo "#!/bin/sh\n/usr/bin/autocutsel -s CLIPBOARD -fork\nxrdb $HOME/.Xresources\nxsetroot -solid grey\n#x-terminal-emulator -geometry  80x24+10+10 -ls -title \"$VNCDESKTOP Desktop\" &\n#x-window-manager &\n# Fix   to make GNOME work\nexport XKL_XMODMAP_DISABLE=1\n/etc/X11/Xsession  &\nx-terminal-emulator -e \"/opt/gradle/gradle-7.0/bin/gradle run 2>&1 | tee  /app/impflog\"" > /root/.vnc/xstartup && \
+  echo "#!/bin/sh\n/usr/bin/autocutsel -s CLIPBOARD -fork\nxrdb $HOME/.Xresources\nxsetroot -solid grey\n#x-terminal-emulator -geometry  80x24+10+10 -ls -title \"$VNCDESKTOP Desktop\" &\n#x-window-manager &\n# Fix   to make GNOME work\nexport XKL_XMODMAP_DISABLE=1\n/etc/X11/Xsession  &\nx-terminal-emulator -e \"/opt/gradle/gradle-7.0.2/bin/gradle run 2>&1 | tee  /app/impflog\"" > /root/.vnc/xstartup && \
   chmod +x /root/.vnc/xstartup && \
   cat /root/.vnc/xstartup && \
   mv /usr/share/novnc/vnc.html /usr/share/novnc/index.html && \
