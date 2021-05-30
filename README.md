@@ -2,7 +2,7 @@
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.4.32-blue.svg?style=flat&logo=kotlin&logoColor=white)](http://kotlinlang.org)
 [![Java](https://img.shields.io/badge/Java-14-red.svg?style=flat&logo=Java&logoColor=white)](https://adoptopenjdk.net)
-[![Gradle](https://img.shields.io/badge/Gradle-7.0.0-08313A.svg?style=flat&logo=Java&logoColor=white)](https://gradle.org)
+[![Gradle](https://img.shields.io/badge/Gradle-7.0.2-08313A.svg?style=flat&logo=Java&logoColor=white)](https://gradle.org)
 [![Selenium](https://img.shields.io/badge/Selenium-3.141.59-green.svg?style=flat&logo=Selenium&logoColor=white)](https://www.selenium.dev/)
 
 Searches the official "[ImpfterminService - Der Patientenservice 116117](https://www.impfterminservice.de/)" for free
@@ -23,7 +23,14 @@ sms:999-999
  ⭐ Customizable by property file  
  ⭐ Docker support to run it locally or in the cloud
 
+## 🤩 Thank You
+This bot exits and became so useful because of the over 20 people who contributed to this project.
+That is strength of open-source power 💪  
+![zaanposni](https://avatars.githubusercontent.com/u/24491035?v=4&s=42) ![fabicodes](https://avatars.githubusercontent.com/u/1745612?v=4&s=42) ![atpanos](https://avatars.githubusercontent.com/u/24278584?v=4&s=42) ![philib](https://avatars.githubusercontent.com/u/7396985?v=4&s=42) ![s01iD](https://avatars.githubusercontent.com/u/811984?v=4&s=42) ![superflo22](https://avatars.githubusercontent.com/u/26706262?v=4&s=42) ![seppi91](https://avatars.githubusercontent.com/u/4396900?v=4&s=42) ![alfonsrv](https://avatars.githubusercontent.com/u/48770755?v=4&s=42) ![schniggie](https://avatars.githubusercontent.com/u/637619?v=4&s=42) ![h0nIg](https://avatars.githubusercontent.com/u/2757302?v=4&s=42) ![Timwun](https://avatars.githubusercontent.com/u/13067978?v=4&s=42) ![TobseF](https://avatars.githubusercontent.com/u/1190109?v=4&s=42)  
+So any thanks has to go to all contributors.  
+If anybody still wants to honor the initial publish you can [buy Tobse a choco donut](https://www.buymeacoffee.com/tobse) 🍩. 
 
+## 🧭 Overview
 ![Sequence Digramm](doc/sequence-doku.png)
 These steps are repeated for every location. So it's no problem to check 14 locations at once.
 If the bot recognizes that no free slots are available, it waits 30 seconds and goes on to the next location.
@@ -118,6 +125,42 @@ iftttEnabled = false
 # These can be skipped, if IFTTT is disabled
 iftttApiKey = xxxxxxxxxxxxxxxx
 iftttEventName = notify
+
+# Enabled alarm sound.
+# Alarm will be played on start and in addition to an enabled notification service.
+alarmEnabled = false
+# Alarm duration in msec
+alarmDuration = 2000
+# Tone frequency in hz
+alarmFrequency = 800
+# Volume in percentage (0.0-1.0)
+alarmVolumeInPercentage = 0.5
+
+# Automatically selects the first possible vaccination date and enters all required personal data based on the following values to book this vaccination slot for you.
+bookingEnabled = false
+# Takes screenshots during booking process to have proof of you booking. (Optional)
+takeScreenshots = false
+# Defines the path were all screenshots will be stored in (Optional). Files will be prefixed with "impf-bot-"
+outputPath = /home
+# Personal Data
+# Salutation (m=man, w=women, d=divers, c=child)
+personalDataSalutation = m
+# Firstname
+personalDataFirstname = Max
+# Lastname
+personalDataLastname = Mustermann
+# Zipcode
+personalDataZipcode = 69124
+# City
+personalDataCity = Heidelberg
+# Street
+personalDataStreet = Hauptstraße
+# House number
+personalDataHouseNumber = 911
+# Phone number. Numbers after the "+49"
+personalDataMobileNumber = 152123123123
+# E-Mail
+personalDataEmail = impfMePlease@lasthope.de
 
 # It seems that non windows agents are blocked. You can set it to "default" to use the default one of chrome.
 # Could be something like: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36"

@@ -64,6 +64,65 @@ object Config : KProperties() {
      */
     val mobileNumber: String by lazyProperty()
 
+    /**
+     * Automatically selects the first possible vaccination date and enters all required personal data based on the following values to book this vaccination slot for you.
+     */
+    val bookingEnabled: Boolean by lazyBoolProperty()
+
+    /**
+     * Takes screenshots during booking process to have proof of you booking.
+     */
+    val takeScreenshots: Boolean by lazyBoolProperty()
+
+    /**
+     * Defines the path were all screenshots will be stored in (Optional)
+     */
+    val outputPath: String by lazyProperty()
+    /**
+     * Salutation (m=man, w=women, d=divers, c=child)
+     */
+    val personalDataSalutation: String by lazyProperty()
+
+    /**
+     * Firstname
+     */
+    val personalDataFirstname: String by lazyProperty()
+
+    /**
+     * Lastname
+     */
+    val personalDataLastname: String by lazyProperty()
+
+    /**
+     * Zipcode
+     */
+    val personalDataZipcode: Int by lazyIntProperty()
+
+    /**
+     * City
+     */
+    val personalDataCity: String by lazyProperty()
+
+    /**
+     * Street
+     */
+    val personalDataStreet: String by lazyProperty()
+
+    /**
+     * House number
+     */
+    val personalDataHouseNumber: String by lazyProperty()
+
+    /**
+     * Phone number. Numbers after the "+49"
+     */
+    val personalDataMobileNumber: String by lazyProperty()
+
+    /**
+     * E-Mail
+     */
+    val personalDataEmail: String by lazyProperty()
+
     fun isSlackEnabled() = slackEnabled
     val slackBotApiToken: String by lazyProperty()
     private val slackEnabled: Boolean by lazyBoolProperty()

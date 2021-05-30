@@ -10,7 +10,11 @@ import de.tfr.impf.sendgrid.SendgridClient
 import de.tfr.impf.slack.SlackClient
 import de.tfr.impf.telegram.TelegramClient
 import mu.KotlinLogging
+import org.apache.commons.io.FileUtils
+import org.openqa.selenium.OutputType
+import org.openqa.selenium.TakesScreenshot
 import org.openqa.selenium.WebDriver
+import java.io.File
 import java.lang.System.currentTimeMillis
 
 val log = KotlinLogging.logger("ReportJob")
@@ -24,6 +28,18 @@ class ReportJob {
     private val sendRequest = Config.sendRequest
     private val mobileNumber = Config.mobileNumber
     private val email = Config.email
+    private val bookingEnabled = Config.bookingEnabled
+    private val takeScreenshots = Config.takeScreenshots
+    private val outputPath = Config.outputPath
+    private val personalDataSalutation = Config.personalDataSalutation
+    private val personalDataFirstname = Config.personalDataFirstname
+    private val personalDataLastname = Config.personalDataLastname
+    private val personalDataZipcode = Config.personalDataZipcode
+    private val personalDataCity = Config.personalDataCity
+    private val personalDataStreet = Config.personalDataStreet
+    private val personalDataHouseNumber = Config.personalDataHouseNumber
+    private val personalDataMobileNumber = Config.personalDataMobileNumber
+    private val personalDataEmail = Config.personalDataEmail
 
     fun reportFreeSlots() {
         log.info { "Person age: $personAge" }
@@ -69,6 +85,9 @@ class ReportJob {
         if (locationPage.isDisplayed()) {
             log.debug { "Changed to location page: $location" }
             if (location.hasCode()) {
+                if (location.hasServerCode() && !location.serverCode.isNullOrEmpty()) {
+                    locationPage.switchToDifferentServer(location.serverCode)
+                }
                 searchFreeDateByCode(locationPage, location)
             } else {
                 checkClaim(locationPage, cookieNag, location)
@@ -91,10 +110,6 @@ class ReportJob {
     ) {
         val cookieNag = CookieNagComponent(driver)
         val code = location.placementCode
-        val serverCode = location.serverCode
-        if (serverCode != null) {
-            locationPage.switchToDifferentServer(serverCode)
-        }
         locationPage.confirmClaim()
         if (code != null) {
             cookieNag.acceptCookies()
@@ -108,10 +123,88 @@ class ReportJob {
                 log.debug { "Correct code, but not free vaccination slots: $location" }
             } else if (bookingPage.isDisplayed() && bookingPage.isDisplayingVaccinationDates()) {
                 sendMessageFoundDates(location)
-                waitLongForUserInput()
+
+                if (bookingEnabled) {
+                    // 1. Select first date possible
+                    Thread.sleep(2_000)
+                    bookingPage.selectFirstVaccinationDatePair()
+                    sendMessage("Selected first vaccination date")
+                    log.debug { "Selected first vaccination date..." }
+                    Thread.sleep(2_000)
+                    takeScreenshot(driver, "impf-bot-vaccination-date-$code.png")
+                    bookingPage.submitInputWithText("AUSWÄHLEN")
+
+                    // 2. Open modal to enter personal data
+                    if (bookingPage.isDisplayingSecondBookingStep()) {
+                        sendMessage("Second booking step is shown")
+                        Thread.sleep(2_000)
+                        bookingPage.selectEnterPersonalData()
+                        log.debug { "Open personal data modal..." }
+                    }
+
+                    // 3. Enter personal data
+                    if (bookingPage.isDisplayingPersonalDataForm()) {
+                        sendMessage("Showing personal data form")
+                        enterAndSubmitPersonalDataIntoForm(bookingPage)
+                        takeScreenshot(driver, "impf-bot-booking-data-$code.png")
+                    }
+
+                    // 4. Submit Vaccination date
+                    if (bookingPage.isDisplayingFinalBookingStep()) {
+                        sendMessage("All personal data entered, ready to submit!")
+                        log.debug { "All personal data entered, ready to submit!" }
+
+                        takeScreenshot(driver, "impf-bot-booking-overview-$code.png")
+
+                        bookingPage.submitFinalBooking()
+
+                        takeScreenshot(driver, "impf-bot-booking-confirmation-$code.png")
+                    }
+                } else {
+                    waitLongForUserInput()
+                }
             } else {
                 log.debug { "Correct code, we can't see the bookable vaccination dates: $location" }
             }
+        }
+    }
+
+    private fun enterAndSubmitPersonalDataIntoForm(bookingPage: BookingPage) {
+        Thread.sleep(2_000)
+        bookingPage.enterSalutation(personalDataSalutation)
+        log.info { "Salutation entered..." }
+        Thread.sleep(2_000)
+        bookingPage.enterFirstname(personalDataFirstname)
+        log.info { "Firstname entered..." }
+        Thread.sleep(2_000)
+        bookingPage.enterLastname(personalDataLastname)
+        log.info { "Lastname entered..." }
+        Thread.sleep(2_000)
+        bookingPage.enterZipCode(personalDataZipcode)
+        log.info { "Zipcode entered..." }
+        Thread.sleep(2_000)
+        bookingPage.enterCity(personalDataCity)
+        log.info { "City entered..." }
+        Thread.sleep(2_000)
+        bookingPage.enterStreet(personalDataStreet)
+        log.info { "Street entered..." }
+        Thread.sleep(2_000)
+        bookingPage.enterHousenumber(personalDataHouseNumber)
+        log.info { "Housenumber entered..." }
+        Thread.sleep(2_000)
+        bookingPage.enterPhone(personalDataMobileNumber)
+        log.info { "Phone entered..." }
+        Thread.sleep(2_000)
+        bookingPage.enterEmail(personalDataEmail)
+        log.info { "Email entered..." }
+        Thread.sleep(2_000)
+        bookingPage.submitInputWithText("Übernehmen")
+    }
+
+    private fun takeScreenshot(driver: WebDriver, fileName: String) {
+        if (takeScreenshots) {
+            val screenshot: File = (driver as TakesScreenshot).getScreenshotAs(OutputType.FILE)
+            FileUtils.copyFile(screenshot, File("${outputPath.ifEmpty { FileUtils.getUserDirectoryPath() }}/$fileName"))
         }
     }
 
