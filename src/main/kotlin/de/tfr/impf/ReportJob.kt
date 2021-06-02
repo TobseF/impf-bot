@@ -80,6 +80,7 @@ class ReportJob {
         mainPage.submitLocation()
 
         takeASeatInWaitingRoom()
+        cookieNag.acceptCookies()
 
         val locationPage = LocationPage(driver)
         if (locationPage.isDisplayed()) {
