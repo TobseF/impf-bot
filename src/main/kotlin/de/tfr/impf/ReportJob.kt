@@ -8,6 +8,7 @@ import de.tfr.impf.telegram.TelegramClient
 import mu.KotlinLogging
 import org.openqa.selenium.WebDriver
 import java.lang.System.currentTimeMillis
+import java.util.concurrent.TimeUnit
 
 val log = KotlinLogging.logger("ReportJob")
 
@@ -24,8 +25,16 @@ class ReportJob {
     fun reportFreeSlots() {
         log.info { "Person age: $personAge" }
         log.info { "Started checking these ${locations.size} locations:\n$locations" }
+
+        val startTime = System.currentTimeMillis()
         while (true) {
             checkLocations()
+
+            if (System.currentTimeMillis() > startTime + (1000 * 60 * 60)) {
+                log.info { "Restarting session" }
+                driver.quit()
+                driver = createDriver()
+            }
         }
     }
 
