@@ -16,6 +16,7 @@ import org.openqa.selenium.TakesScreenshot
 import org.openqa.selenium.WebDriver
 import java.io.File
 import java.lang.System.currentTimeMillis
+import java.util.concurrent.TimeUnit
 
 val log = KotlinLogging.logger("ReportJob")
 
@@ -53,8 +54,16 @@ class ReportJob {
                 "email: $email"
         sendMessage(message)
         log.info { "Started checking these ${locations.size} locations:\n$locations" }
+
+        val startTime = System.currentTimeMillis()
         while (true) {
             checkLocations()
+
+            if (System.currentTimeMillis() > startTime + (1000 * 60 * 60)) {
+                log.info { "Restarting session" }
+                driver.quit()
+                driver = createDriver()
+            }
         }
     }
 
