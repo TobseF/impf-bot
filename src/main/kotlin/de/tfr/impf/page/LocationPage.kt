@@ -41,7 +41,7 @@ class LocationPage(driver: WebDriver) : AbstractPage(driver) {
     }
 
     fun enterAge(age: Int) {
-        findBy("//input[@formcontrolname='age']").sendKeys("" + age)
+        findBy("//input[@formcontrolname='birthdate']").sendKeys("" + birthdate)
     }
 
     /**
