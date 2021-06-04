@@ -11,5 +11,6 @@ class TelegramClient{
         val bot = Bot.createPolling(username, token)
         bot.start()
         bot.sendMessage(chatId = chatId, text = message)
+        bot.stop()
     }
 }
