@@ -55,7 +55,6 @@ class ReportJob {
                 "email: $email"
         sendMessage(message)
         log.info { "Started checking these ${locations.size} locations:\n$locations" }
-
         while (true) {
             checkLocations()
         }
