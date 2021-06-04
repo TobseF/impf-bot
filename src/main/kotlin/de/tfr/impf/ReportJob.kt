@@ -26,7 +26,6 @@ class ReportJob {
     fun reportFreeSlots() {
         log.info { "Person age: $personAge" }
         log.info { "Started checking these ${locations.size} locations:\n$locations" }
-
         while (true) {
             checkLocations()
         }
