@@ -56,7 +56,10 @@ object Config : KProperties() {
     fun waitingTimeInWaitingRoom(): Long = TimeUnit.MINUTES.toMillis(waitingTimeInWaitingRoom)
 
 
-    val personAge: Int by lazyIntProperty()
+    /**
+     *  Birth date verification field [DD.MM.YYYY].
+     */
+    val birthDate: String by lazyProperty()
     val email: String by lazyProperty()
 
     /**

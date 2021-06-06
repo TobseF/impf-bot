@@ -68,8 +68,8 @@ state = Baden-Württemberg
 # Comma separated list of locations. Optional, if you already have a placement code just add it in square brackets after the place. Since placement codes are not related to locations but to servers you can furthermore optionally specify the related server code next to the placement code in parentheses. The server code can be found in the URL e.g. "001-iz.impfterminservice.de" -> server code == "001".
 locations = 69124 Heidelberg[XXXX-XXXX-XXXX](XXX),76137 Karlsruhe
 
-# Your age. Used in age verification field.
-personAge = 42
+# Birth date, used for age verification (which also changes the available vaccines).
+birthDate = 31.12.1994
 
 # Waiting time before checking the next location in seconds [s]
 waitingTime = 120
