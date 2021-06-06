@@ -24,7 +24,7 @@ class ReportJob {
     private var driver: WebDriver = createDriver()
 
     private val locations = Config.locationList()
-    private val personAge = Config.personAge
+    private val birthDate = Config.birthDate
     private val sendRequest = Config.sendRequest
     private val mobileNumber = Config.mobileNumber
     private val email = Config.email
@@ -42,12 +42,12 @@ class ReportJob {
     private val personalDataEmail = Config.personalDataEmail
 
     fun reportFreeSlots() {
-        log.info { "Person age: $personAge" }
+        log.info { "Person age: $birthDate" }
         log.info { "Send requests: $sendRequest" }
         log.info { "mobileNumber: $mobileNumber" }
         log.info { "email: $email" }
         val message = "Starting search for free slots with the following data:\n" +
-                "Person age: $personAge \n" +
+                "Person age: $birthDate \n" +
                 "Send requests: $sendRequest \n" +
                 "mobileNumber: $mobileNumber \n" +
                 "email: $email"
@@ -221,7 +221,7 @@ class ReportJob {
             log.debug { "Location: $location is full" }
         } else {
             locationPage.checkCorrectPerson()
-            locationPage.enterAge(personAge)
+            locationPage.enterBirthDate(birthDate)
             locationPage.submitInput()
             Thread.sleep(Config.waitingTimeForBrowser())
             if (locationPage.isFull()) {

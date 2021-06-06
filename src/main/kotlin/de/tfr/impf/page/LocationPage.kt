@@ -40,8 +40,8 @@ class LocationPage(driver: WebDriver) : AbstractPage(driver) {
         findAnyBy("//input[@type='radio' and @formcontrolname='isValid']//following-sibling::span[contains(text(),'Ja')]/..")?.click()
     }
 
-    fun enterAge(age: Int) {
-        findBy("//input[@formcontrolname='age']").sendKeys("" + age)
+    fun enterBirthDate(birthDate: String) {
+        findBy("//input[@formcontrolname='birthdate']").sendKeys(birthDate)
     }
 
     /**
