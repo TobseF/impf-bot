@@ -126,6 +126,16 @@ object Config : KProperties() {
      */
     val personalDataEmail: String by lazyProperty()
 
+    /**
+     * Clears browser cookies to avoid bot detection. Disabled as default.
+     */
+    val clearCookies = false
+
+    /**
+     * Experimental feature, which tries to clear the browser cache to avoid bot detection. Disabled as default.
+     */
+    val experimentalClearBrowser: Boolean by lazyBoolProperty()
+
     fun isSlackEnabled() = slackEnabled
     val slackBotApiToken: String by lazyProperty()
     private val slackEnabled: Boolean by lazyBoolProperty()

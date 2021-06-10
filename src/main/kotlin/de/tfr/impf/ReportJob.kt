@@ -16,7 +16,6 @@ import org.openqa.selenium.TakesScreenshot
 import org.openqa.selenium.WebDriver
 import java.io.File
 import java.lang.System.currentTimeMillis
-import java.util.concurrent.TimeUnit
 
 val log = KotlinLogging.logger("ReportJob")
 
@@ -68,11 +67,14 @@ class ReportJob {
                 log.error(e) { "Failed to check location: $location\n" + e.message }
             }
 
-            if (System.currentTimeMillis() > startTime + (1000 * 60 * 60)) {
-                log.info { "Restarting session" }
+            if (Config.experimentalClearBrowser) {
+                log.debug { "Clearing Browser Cache (Experimental)" }
                 driver.quit()
                 driver = createDriver()
-                startTime = System.currentTimeMillis()
+            }
+            if (Config.clearCookies) {
+                log.debug { "Clearing Browser Cookies" }
+                driver.manage().deleteAllCookies()
             }
 
             Thread.sleep(Config.waitingTime())
