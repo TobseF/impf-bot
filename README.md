@@ -204,11 +204,22 @@ The build creates runnable Java-fat-jar which contains all dependencies and the 
 ## 🚀 Start
 
 To run the bot, simply use the gradle command:
+
 ```shell
 gradle run
 ```
 
 As an alternative, you can also start it with the fat-jar in the command line by:
+
 ```shell
 java -jar build/libs/impf-bot-1.0-SNAPSHOT-all.jar 
 ```
+
+## 📜 License
+
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or distribute this software, either in source code form or
+as a compiled binary, for any purpose, commercial or non-commercial, and by any means.
+
+For more information, check out [unlicense.org](https://unlicense.org)
